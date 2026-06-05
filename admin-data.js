@@ -29,7 +29,7 @@
     return txt ? JSON.parse(txt) : null;
   }
 
-  // upsert theo khóa chính id (không xoá cả bảng)
+  // upsert theo khóa chính id (cần quyền update — dùng cho admin đã đăng nhập)
   function upsert(table, rows) {
     const arr = Array.isArray(rows) ? rows : [rows];
     if (!arr.length) return Promise.resolve();
@@ -37,6 +37,14 @@
       method: "POST",
       headers: { Prefer: "resolution=merge-duplicates,return=minimal" },
       body: JSON.stringify(arr),
+    });
+  }
+  // insert thuần (chỉ thêm mới) — dùng cho khách gửi đăng ký từ landing (anon)
+  function insertRow(table, row) {
+    return rest(table, {
+      method: "POST",
+      headers: { Prefer: "return=minimal" },
+      body: JSON.stringify(row),
     });
   }
 
@@ -99,6 +107,8 @@
   const listApply = async (docDefaults) => (await rest("applications?select=*&order=created_at.desc") || []).map((r) => rowToApply(r, docDefaults));
   const saveConsult = (rec) => upsert("consultations", consultToRow(rec));
   const saveApply = (rec) => upsert("applications", applyToRow(rec));
+  const submitConsult = (rec) => insertRow("consultations", consultToRow(rec)); // landing (anon)
+  const submitApply = (rec) => insertRow("applications", applyToRow(rec));       // landing (anon)
   const delConsult = (id) => rest(`consultations?id=eq.${id}`, { method: "DELETE", headers: { Prefer: "return=minimal" } });
   const delApply = (id) => rest(`applications?id=eq.${id}`, { method: "DELETE", headers: { Prefer: "return=minimal" } });
 
@@ -142,7 +152,7 @@
 
   window.PNE = {
     enabled, session, signIn, signOut,
-    listConsult, listApply, saveConsult, saveApply, delConsult, delApply,
+    listConsult, listApply, saveConsult, saveApply, submitConsult, submitApply, delConsult, delApply,
     listUsers, saveUser,
     cmsGetDraft: () => cmsGet("draft"), cmsGetPublished: () => cmsGet("published"), cmsSaveDraft, cmsPublish,
     uploadHoSo: (path, file) => uploadFile("ho-so", path, file),

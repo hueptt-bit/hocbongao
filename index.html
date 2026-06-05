@@ -761,10 +761,10 @@ async function submitToBackend(data){
     }
     const rec={...base,status:'Chờ kiểm tra hồ sơ',province:data.tinh||'',level:data.trinhdo_duc||'Chưa có',due:'',docs,
       notes:data.noidung?[{m:data.noidung,by:'Landing',at:new Date().toLocaleDateString('vi-VN')}]:[]};
-    await PNE.saveApply(rec);
+    await PNE.submitApply(rec);
   }else{
     const rec={...base,status:'Mới',need:data.noidung||'Đăng ký tư vấn',last:'',notes:[]};
-    await PNE.saveConsult(rec);
+    await PNE.submitConsult(rec);
   }
 }
 const modal=document.getElementById('regModal');
