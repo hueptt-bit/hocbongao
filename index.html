@@ -1,0 +1,760 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Học Bổng Ngành Điều Dưỡng Tại Áo 2026 — Phuong Nam Education</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet"/>
+<style>
+:root{
+  /* PNE brand palette — Red anchor #D12026, neutral scale, light surfaces */
+  --r:#D12026; --r2:#E04146; --rd:#B81C20; --rl:#FDE5E6; --rxl:#FFF8F8;
+  --grad:linear-gradient(135deg,#D12026 0%,#E04146 100%);        /* Brand Red */
+  --grad-soft:linear-gradient(135deg,#D12026 0%,#B81C20 100%);   /* deep red text */
+  --grad-depth:linear-gradient(135deg,#B81C20 0%,#D12026 50%,#EB6E72 100%); /* Red Depth */
+  --k:#1A1A1B; --k2:#454547; --k3:#767678;
+  --bd:#E3E3E4; --sf:#F1F1F1; --w:#FFFFFF;
+  --ff:'Be Vietnam Pro',sans-serif;
+  --shadow:0 10px 40px -12px rgba(26,27,28,.16);
+  --shadow-r:0 16px 40px -10px rgba(209,32,38,.40);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:var(--ff);background:var(--w);color:var(--k);-webkit-font-smoothing:antialiased;overflow-x:hidden}
+a{text-decoration:none;color:inherit}
+img{display:block}
+::selection{background:var(--r);color:#fff}
+
+.wrap{max-width:1180px;margin:0 auto;padding:0 40px}
+.grad-text{background:var(--grad);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:transparent}
+
+/* SCROLL PROGRESS */
+#progress{position:fixed;top:0;left:0;height:3px;width:0;z-index:500;background:var(--grad);box-shadow:0 0 12px rgba(209,32,38,.6);transition:width .1s linear}
+
+/* BUTTONS */
+.btn{position:relative;display:inline-flex;align-items:center;gap:8px;font-family:var(--ff);font-weight:700;font-size:15px;padding:15px 30px;border-radius:14px;border:none;cursor:pointer;transition:transform .2s cubic-bezier(.34,1.56,.64,1),box-shadow .2s,background .2s;white-space:nowrap;overflow:hidden}
+.btn-r{background:var(--grad);color:#fff;box-shadow:var(--shadow-r)}
+.btn-r::after{content:'';position:absolute;top:0;left:-120%;width:60%;height:100%;background:linear-gradient(100deg,transparent,rgba(255,255,255,.45),transparent);transform:skewX(-18deg);transition:left .6s}
+.btn-r:hover{transform:translateY(-3px) scale(1.015)}
+.btn-r:hover::after{left:140%}
+.btn-o{background:var(--w);color:var(--k);border:1.5px solid var(--bd);font-weight:600}
+.btn-o:hover{background:var(--sf);transform:translateY(-3px);border-color:var(--r);color:var(--r)}
+.btn-w{background:#fff;color:var(--r);font-weight:800}.btn-w:hover{transform:translateY(-3px);box-shadow:0 14px 30px -10px rgba(0,0,0,.35)}
+.btn-ow{background:rgba(255,255,255,.12);color:#fff;border:1.5px solid rgba(255,255,255,.45);font-weight:600;backdrop-filter:blur(6px)}.btn-ow:hover{background:rgba(255,255,255,.22);transform:translateY(-3px)}
+
+/* REVEAL */
+.rv{opacity:0;transform:translateY(26px) scale(.99);transition:opacity .7s cubic-bezier(.22,.7,.2,1),transform .7s cubic-bezier(.22,.7,.2,1)}
+.rv.on{opacity:1;transform:none}
+.d1{transition-delay:.09s}.d2{transition-delay:.18s}.d3{transition-delay:.27s}.d4{transition-delay:.36s}
+
+/* ══ HEADER ══ */
+header{position:sticky;top:0;z-index:200;background:rgba(255,255,255,.82);backdrop-filter:blur(26px) saturate(160%);border-bottom:1px solid rgba(236,236,239,.9)}
+.hdr{display:flex;align-items:center;justify-content:space-between;height:68px;max-width:1180px;margin:0 auto;padding:0 40px}
+.hdr-logo img{height:38px}
+.hdr-right{display:flex;align-items:center;gap:12px}
+.hmb{display:none;flex-direction:column;justify-content:center;gap:5px;width:42px;height:42px;border:1.5px solid var(--bd);border-radius:11px;background:var(--w);cursor:pointer;padding:0}
+.hmb span{display:block;width:18px;height:2px;background:var(--k);margin:0 auto;border-radius:2px;transition:transform .25s,opacity .2s}
+.hmb.x span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+.hmb.x span:nth-child(2){opacity:0}
+.hmb.x span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+nav a{position:relative;font-size:13.5px;font-weight:600;color:var(--k2);margin-left:26px;transition:color .15s}
+nav a::after{content:'';position:absolute;left:0;bottom:-6px;width:0;height:2px;background:var(--grad);border-radius:2px;transition:width .25s}
+nav a:hover{color:var(--r)}
+nav a:hover::after{width:100%}
+
+/* ══ HERO ══ */
+.hero{position:relative;display:grid;grid-template-columns:53% 47%;min-height:100svh;isolation:isolate}
+.hero-l{
+  position:relative;
+  background:radial-gradient(82% 68% at 6% 14%,var(--rl) 0%,var(--rxl) 40%,var(--w) 74%);
+  display:flex;flex-direction:column;justify-content:center;
+  padding:80px 56px 80px 0;
+  padding-left:max(40px,calc((100vw - 1180px)/2 + 40px));
+  overflow:hidden;
+}
+/* red accent stripe (brand motif "sọc đỏ accent") */
+.hero-l-bar{position:absolute;left:0;top:96px;bottom:96px;width:5px;border-radius:0 4px 4px 0;background:linear-gradient(to bottom,var(--r) 0%,rgba(209,32,38,.12) 100%);z-index:1}
+/* animated gradient blobs */
+.blob{position:absolute;border-radius:50%;filter:blur(60px);opacity:.5;z-index:-1;pointer-events:none}
+.blob-1{width:420px;height:420px;background:radial-gradient(circle,rgba(224,65,70,.40),transparent 70%);top:-120px;left:-120px;animation:float1 14s ease-in-out infinite}
+.blob-2{width:360px;height:360px;background:radial-gradient(circle,rgba(209,32,38,.32),transparent 70%);bottom:-100px;left:30%;animation:float2 18s ease-in-out infinite}
+@keyframes float1{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(40px,30px) scale(1.1)}}
+@keyframes float2{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(-30px,-40px) scale(1.08)}}
+.hero-l::before{
+  content:'2026';position:absolute;right:-20px;top:50%;transform:translateY(-50%);
+  font-size:230px;font-weight:900;color:rgba(209,32,38,.06);
+  letter-spacing:-.04em;line-height:1;pointer-events:none;user-select:none;z-index:-1;
+}
+
+.h-badge{align-self:flex-start;display:inline-flex;align-items:center;gap:8px;background:var(--w);color:var(--r);font-size:11px;font-weight:800;letter-spacing:.16em;text-transform:uppercase;padding:8px 15px;border-radius:30px;margin-bottom:28px;border:1px solid rgba(209,32,38,.25);box-shadow:0 4px 18px -6px rgba(209,32,38,.3)}
+.h-badge .dot{width:8px;height:8px;border-radius:50%;background:var(--r);position:relative}
+.h-badge .dot::after{content:'';position:absolute;inset:0;border-radius:50%;background:var(--r);animation:ping 1.8s cubic-bezier(0,0,.2,1) infinite}
+@keyframes ping{0%{transform:scale(1);opacity:.7}75%,100%{transform:scale(2.6);opacity:0}}
+
+.h1{font-size:clamp(30px,3.4vw,46px);font-weight:800;letter-spacing:-.02em;line-height:1.14;color:var(--k);margin-bottom:6px;text-wrap:balance}
+.h1 .r{display:block;background:var(--grad-soft);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:transparent}
+
+.h-rule{display:flex;align-items:center;gap:10px;margin:18px 0;color:var(--r);font-size:12px;font-weight:800;letter-spacing:.16em}
+.h-rule::before{content:'';flex:0 0 30px;height:3px;background:var(--grad);border-radius:2px}
+.h-rule::after{content:'';flex:0 0 14px;height:3px;background:rgba(209,32,38,.3);border-radius:2px}
+
+.h-desc{font-size:15.5px;line-height:1.76;color:var(--k2);max-width:470px;margin-bottom:18px}
+
+.h-loc{align-self:flex-start;display:inline-flex;align-items:center;gap:11px;padding:11px 17px;background:rgba(255,255,255,.7);backdrop-filter:blur(8px);border:1px solid var(--bd);border-radius:14px;margin-bottom:32px;box-shadow:0 6px 20px -10px rgba(0,0,0,.18)}
+.h-loc-flag{font-size:20px}
+.h-loc-label{font-size:9.5px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--k3);display:block}
+.h-loc-val{font-size:13.5px;font-weight:700;color:var(--k);display:block;margin-top:1px}
+
+.h-ctas{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:48px}
+
+/* Stats */
+.h-stats{display:grid;grid-template-columns:repeat(4,1fr);border-radius:20px;overflow:hidden;background:rgba(255,255,255,.75);backdrop-filter:blur(10px);border:1px solid var(--bd);box-shadow:var(--shadow);max-width:540px}
+.hst{padding:18px 16px;position:relative;transition:background .2s}
+.hst:hover{background:var(--rxl)}
+.hst+.hst{border-left:1px solid var(--bd)}
+.hst-v{font-size:24px;font-weight:800;line-height:1;letter-spacing:-.02em;background:var(--grad);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:transparent}
+.hst-l{font-size:10.5px;font-weight:500;color:var(--k3);margin-top:5px;line-height:1.4}
+
+/* Right panel — full-bleed photo + floating chips */
+.hero-r{position:relative;overflow:hidden}
+.hero-r img.nurse-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 12%;transition:transform .9s cubic-bezier(.22,.7,.2,1)}
+.hero-r:hover img.nurse-img{transform:scale(1.04)}
+.nurse-cap{position:absolute;top:26px;left:26px;z-index:2;display:flex;align-items:center;gap:11px;background:rgba(255,255,255,.9);backdrop-filter:blur(16px);border-radius:14px;padding:11px 15px;box-shadow:0 14px 38px -14px rgba(0,0,0,.3);border:1px solid rgba(255,255,255,.7)}
+.nc-dot{width:10px;height:10px;border-radius:50%;background:var(--r);position:relative;flex-shrink:0}
+.nc-dot::after{content:'';position:absolute;inset:0;border-radius:50%;background:var(--r);animation:ping 1.8s cubic-bezier(0,0,.2,1) infinite}
+.nc-label{font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--k3)}
+.nc-val{font-size:14.5px;font-weight:800;color:var(--k);line-height:1.2}
+.nurse-pin{position:absolute;bottom:26px;right:26px;z-index:2;display:flex;align-items:center;gap:7px;background:rgba(255,255,255,.9);backdrop-filter:blur(12px);border:1px solid rgba(255,255,255,.7);border-radius:30px;padding:8px 14px;font-size:12px;font-weight:700;color:var(--k);box-shadow:0 10px 28px -12px rgba(0,0,0,.28)}
+.nurse-pin svg{width:13px;height:13px;stroke:var(--r);fill:none;stroke-width:2}
+
+/* ══ ĐIỂM ĐẾN (Innsbruck banner bo góc) ══ */
+.dest{padding:62px 0 0;background:var(--w)}
+.innsbruck-strip{position:relative;height:330px;overflow:hidden;border-radius:24px;box-shadow:var(--shadow)}
+.innsbruck-strip img{width:100%;height:100%;object-fit:cover;object-position:center 40%;transition:transform 1s ease}
+.innsbruck-strip:hover img{transform:scale(1.05)}
+.innsbruck-strip::before{content:'';position:absolute;inset:0;background:linear-gradient(to right,rgba(26,26,27,.58) 0%,rgba(26,26,27,.18) 50%,transparent 80%);z-index:1}
+.innsbruck-caption{position:absolute;left:0;top:0;bottom:0;z-index:2;display:flex;flex-direction:column;justify-content:center;padding:0 44px}
+.inn-tag{font-size:10.5px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:rgba(255,255,255,.8);margin-bottom:9px}
+.inn-city{font-size:clamp(22px,2.6vw,34px);font-weight:800;color:#fff;letter-spacing:-.02em;line-height:1.15}
+.inn-desc{font-size:13.5px;color:rgba(255,255,255,.82);margin-top:8px;max-width:520px}
+
+/* ══ KEY FACTS (float trên banner) ══ */
+.kf-grid{display:grid;grid-template-columns:repeat(5,1fr);position:relative;z-index:5;margin:-46px 16px 0}
+.kf{background:var(--w);padding:22px 18px;display:flex;gap:13px;align-items:flex-start;border:1px solid var(--bd);transition:transform .22s,box-shadow .22s}
+.kf:first-child{border-radius:18px 0 0 18px}
+.kf:last-child{border-radius:0 18px 18px 0}
+.kf+.kf{border-left:none}
+.kf:hover{transform:translateY(-6px);box-shadow:var(--shadow);z-index:2;border-radius:18px;border-color:rgba(209,32,38,.25)}
+.kf-ic{width:40px;height:40px;border-radius:12px;background:var(--grad);display:flex;align-items:center;justify-content:center;flex-shrink:0;box-shadow:0 8px 18px -6px rgba(209,32,38,.5)}
+.kf-ic svg{width:18px;height:18px;stroke:#fff;fill:none;stroke-width:1.9}
+.kf-v{font-size:13.5px;font-weight:700;color:var(--k);line-height:1.3;margin-bottom:2px}
+.kf-l{font-size:11px;color:var(--k3)}
+
+/* ══ SECTION BASE ══ */
+section{padding:62px 0}
+.bg-sf{background:linear-gradient(180deg,var(--sf) 0%,var(--w) 100%)}
+.sec-ew{display:inline-block;font-size:11px;font-weight:800;letter-spacing:.18em;text-transform:uppercase;color:var(--r);margin-bottom:12px;padding:5px 13px;background:var(--rl);border-radius:20px}
+.sec-t{font-size:clamp(26px,3vw,40px);font-weight:800;letter-spacing:-.026em;color:var(--k);line-height:1.18;margin-bottom:12px}
+.sec-d{font-size:15px;color:var(--k3);line-height:1.74;max-width:520px}
+
+/* ══ BENEFITS ══ */
+.ql-hd{text-align:center;margin-bottom:56px;display:flex;flex-direction:column;align-items:center}
+.ql-t{font-size:clamp(26px,3vw,40px);font-weight:800;letter-spacing:-.026em;color:var(--k)}
+.ql-line{width:60px;height:4px;background:var(--grad);border-radius:2px;margin:16px auto 0}
+
+.ql-grid{display:grid;grid-template-columns:1fr 1fr;gap:26px}
+.ql-card{background:var(--w);border:1px solid var(--bd);border-radius:26px;padding:38px 34px;box-shadow:0 4px 20px -10px rgba(0,0,0,.1);position:relative;overflow:hidden;transition:transform .3s,box-shadow .3s}
+.ql-card::before{content:'';position:absolute;top:0;left:0;right:0;height:5px;background:var(--grad)}
+.ql-card::after{content:'';position:absolute;top:-60px;right:-60px;width:180px;height:180px;border-radius:50%;background:radial-gradient(circle,rgba(209,32,38,.07),transparent 70%);pointer-events:none}
+.ql-card:hover{transform:translateY(-8px);box-shadow:0 30px 60px -20px rgba(209,32,38,.28)}
+.ql-tag{font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--k3);margin-bottom:10px}
+.ql-num{font-size:clamp(54px,5.5vw,76px);font-weight:900;line-height:1;letter-spacing:-.04em;background:var(--grad);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:transparent}
+.ql-sub{font-size:14px;font-weight:600;color:var(--k);margin:12px 0 22px;padding-bottom:18px;border-bottom:1px solid var(--bd)}
+.ql-list{display:flex;flex-direction:column;gap:12px}
+.ql-item{display:flex;gap:12px;align-items:flex-start;font-size:13.5px;color:var(--k2);line-height:1.6}
+.ql-dot{width:8px;height:8px;border-radius:50%;background:var(--grad);flex-shrink:0;margin-top:6px;box-shadow:0 0 0 4px rgba(209,32,38,.1)}
+.ql-item b{color:var(--k);font-weight:700}
+
+/* ══ PHOTO STRIP ══ */
+.ph-section{padding:62px 0;background:var(--w)}
+.ph-head{text-align:center;margin-bottom:40px;display:flex;flex-direction:column;align-items:center}
+/* Auto-running slider (marquee) */
+.slider{overflow:hidden;-webkit-mask-image:linear-gradient(90deg,transparent 0,#000 4%,#000 96%,transparent 100%);mask-image:linear-gradient(90deg,transparent 0,#000 4%,#000 96%,transparent 100%)}
+.slider-track{display:flex;gap:22px;width:max-content;animation:slideX 42s linear infinite;will-change:transform}
+.slider:hover .slider-track{animation-play-state:paused}
+@keyframes slideX{from{transform:translateX(0)}to{transform:translateX(calc(-50% - 11px))}}
+.slide{position:relative;flex:0 0 auto;width:360px;height:300px;border-radius:22px;overflow:hidden;box-shadow:0 12px 34px -16px rgba(0,0,0,.3)}
+.slide img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .6s cubic-bezier(.22,.7,.2,1)}
+.slide:hover img{transform:scale(1.06)}
+.ph-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(26,26,27,.82) 0%,rgba(26,26,27,.18) 48%,transparent 72%)}
+.ph-info{position:absolute;bottom:0;left:0;right:0;padding:24px 22px}
+.ph-num{display:inline-block;font-size:10px;font-weight:800;letter-spacing:.16em;text-transform:uppercase;color:#fff;margin-bottom:7px;padding:4px 10px;background:rgba(255,255,255,.18);backdrop-filter:blur(6px);border-radius:20px}
+.ph-cap{font-size:15px;font-weight:700;color:#fff;line-height:1.35}
+
+/* ══ 3-COL INFO ══ */
+.info3{padding:62px 0;background:linear-gradient(180deg,var(--sf) 0%,var(--rxl) 100%)}
+.i3-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+.i3c{background:var(--w);border:1px solid var(--bd);border-radius:24px;padding:32px 28px;box-shadow:0 4px 20px -12px rgba(0,0,0,.12);transition:transform .3s,box-shadow .3s}
+.i3c:hover{transform:translateY(-6px);box-shadow:0 24px 50px -22px rgba(209,32,38,.25)}
+.i3-tag{display:inline-block;font-size:10.5px;font-weight:800;letter-spacing:.16em;text-transform:uppercase;color:var(--r);margin-bottom:12px;padding:4px 11px;background:var(--rl);border-radius:20px}
+.i3-title{font-size:19px;font-weight:800;color:var(--k);margin-bottom:18px;padding-bottom:14px;border-bottom:1px solid var(--bd)}
+.i3-list{display:flex;flex-direction:column;gap:12px}
+.i3-item{display:flex;gap:11px;align-items:flex-start;font-size:13.5px;color:var(--k2);line-height:1.6}
+.i3-ic{width:22px;height:22px;border-radius:50%;background:var(--rl);display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px}
+.i3-ic svg{width:11px;height:11px;stroke:var(--r);fill:none;stroke-width:3}
+.i3-pill{display:inline-block;margin-top:6px;font-size:11px;font-weight:700;color:var(--r);background:var(--rl);padding:4px 11px;border-radius:20px}
+
+/* Contact card */
+.i3-dl{font-size:33px;font-weight:900;letter-spacing:-.01em;line-height:1;white-space:nowrap;margin-bottom:14px;background:var(--grad);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:transparent}
+.i3-dl-note{font-size:12px;color:var(--k3);line-height:1.6;margin-bottom:16px}
+.i3-free{display:flex;align-items:center;justify-content:center;gap:8px;background:var(--rl);color:var(--rd);border:1px dashed rgba(209,32,38,.4);border-radius:11px;padding:10px 14px;font-size:12.5px;font-weight:700;text-align:center;line-height:1.4;margin-bottom:16px}
+.i3-free svg{width:15px;height:15px;stroke:var(--r);fill:none;stroke-width:2.5;flex-shrink:0}
+.i3-cr{display:flex;gap:9px;align-items:center;font-size:13px;margin-bottom:9px}
+.i3-cr svg{stroke:var(--r);fill:none;stroke-width:1.8;flex-shrink:0;width:15px;height:15px}
+.i3-cr b{color:var(--k);font-weight:700}
+.i3-cr span{color:var(--k3)}
+
+/* ══ CTA ══ */
+.cta-s{background:radial-gradient(125% 130% at 85% 8%,var(--rl) 0%,var(--rxl) 42%,var(--w) 76%);padding:62px 0;position:relative;overflow:hidden;border-top:1px solid var(--bd);border-bottom:1px solid var(--bd)}
+.cta-s::before{content:'';position:absolute;right:-120px;top:-100px;width:420px;height:420px;border-radius:50%;background:radial-gradient(circle,rgba(209,32,38,.08),transparent 70%);animation:float1 16s ease-in-out infinite}
+.cta-s::after{content:'';position:absolute;left:-80px;bottom:-80px;width:300px;height:300px;border-radius:50%;background:radial-gradient(circle,rgba(209,32,38,.05),transparent 70%);animation:float2 20s ease-in-out infinite}
+.cta-g{display:grid;grid-template-columns:1fr auto;gap:54px;align-items:center;position:relative;z-index:1}
+.cta-t{font-size:clamp(24px,2.9vw,40px);font-weight:800;color:var(--k);letter-spacing:-.024em;line-height:1.18;margin-bottom:14px}
+.cta-d{font-size:15.5px;color:var(--k2);line-height:1.7;max-width:520px}
+.cta-btns{display:flex;gap:12px;flex-wrap:wrap;margin-top:28px}
+.cta-box{background:var(--w);border:1px solid var(--bd);border-radius:20px;padding:26px 34px;text-align:center;white-space:nowrap;box-shadow:var(--shadow)}
+.cbox-l{font-size:10px;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--k3);margin-bottom:10px}
+.cbox-d{font-size:30px;font-weight:800;line-height:1;background:var(--grad);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:transparent}
+.cbox-n{font-size:12px;color:var(--k3);margin-top:10px;line-height:1.5}
+
+/* ══ FOOTER ══ */
+.foot{background:var(--sf);border-top:1px solid var(--bd);padding:36px 0}
+.foot-in{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:22px}
+.fl-logo{display:flex;align-items:center;gap:13px}
+.fl-logo img{height:38px}
+.fn{font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--k)}
+.fs{font-size:11px;color:var(--k3);margin-top:3px}
+.fl-right{display:flex;flex-direction:column;gap:6px;text-align:right}
+.fl-row{font-size:12.5px;color:var(--k3);display:flex;gap:8px;align-items:center;justify-content:flex-end}
+.fl-row b{color:var(--k);font-weight:700}
+.fcopy{background:var(--sf);border-top:1px solid var(--bd);padding:14px 0;text-align:center;font-size:11px;color:var(--k3)}
+
+/* ══ MODAL ĐĂNG KÝ ══ */
+.modal{position:fixed;inset:0;z-index:600;display:none;align-items:flex-start;justify-content:center;padding:40px 16px;overflow-y:auto}
+.modal.open{display:flex}
+.modal-bg{position:fixed;inset:0;background:rgba(26,26,27,.55);backdrop-filter:blur(4px);opacity:0;transition:opacity .25s}
+.modal.open .modal-bg{opacity:1}
+.modal-card{position:relative;width:100%;max-width:480px;background:var(--w);border-radius:24px;box-shadow:0 40px 90px -25px rgba(0,0,0,.5);overflow:hidden;margin:auto;transform:translateY(18px) scale(.97);opacity:0;transition:transform .32s cubic-bezier(.22,1.4,.5,1),opacity .3s}
+.modal.open .modal-card{transform:none;opacity:1}
+.modal-head{position:relative;background:var(--grad);padding:26px 28px 22px;color:#fff}
+.modal-head .eb{font-size:10.5px;font-weight:800;letter-spacing:.15em;text-transform:uppercase;color:rgba(255,255,255,.82);margin-bottom:7px}
+.modal-head h3{font-size:22px;font-weight:800;letter-spacing:-.01em;line-height:1.2}
+.modal-head p{font-size:12.5px;color:rgba(255,255,255,.88);margin-top:7px;line-height:1.5}
+.modal-x{position:absolute;top:16px;right:16px;width:34px;height:34px;border-radius:50%;border:none;background:rgba(255,255,255,.2);color:#fff;font-size:21px;line-height:1;cursor:pointer;transition:background .15s}
+.modal-x:hover{background:rgba(255,255,255,.34)}
+.modal-body{padding:24px 28px 28px}
+.fld{margin-bottom:14px}
+.fld label{display:block;font-size:12px;font-weight:700;color:var(--k2);margin-bottom:6px}
+.fld label .req{color:var(--r)}
+.fld input,.fld select,.fld textarea{width:100%;font-family:var(--ff);font-size:14px;color:var(--k);padding:11px 13px;border:1.5px solid var(--bd);border-radius:11px;background:var(--w);transition:border-color .15s,box-shadow .15s}
+.fld input:focus,.fld select:focus,.fld textarea:focus{outline:none;border-color:var(--r);box-shadow:0 0 0 3px rgba(209,32,38,.12)}
+.fld textarea{resize:vertical;min-height:70px}
+.fld input.err,.fld select.err{border-color:var(--r);box-shadow:0 0 0 3px rgba(209,32,38,.12)}
+.row2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.toggle-line{display:flex;gap:10px;align-items:flex-start;padding:12px 14px;background:var(--rxl);border:1px solid var(--rl);border-radius:12px;margin-bottom:14px;cursor:pointer}
+.toggle-line input{margin-top:2px;width:16px;height:16px;accent-color:var(--r);flex-shrink:0}
+.toggle-line span{font-size:12.5px;color:var(--k2);line-height:1.5}
+.toggle-line b{color:var(--k)}
+.hoso{display:none;margin-bottom:14px}
+.hoso.show{display:block}
+.hoso-note{font-size:11.5px;color:var(--k3);line-height:1.55;margin-bottom:6px}
+.hoso-item{display:flex;flex-direction:column;gap:7px;padding:11px 0;border-top:1px solid var(--bd);cursor:pointer}
+.hoso-item:first-of-type{border-top:none}
+.hoso-lbl{display:flex;align-items:flex-start;gap:9px;font-size:12.5px;font-weight:600;color:var(--k2);line-height:1.4}
+.hoso-no{flex-shrink:0;width:20px;height:20px;border-radius:50%;background:var(--rl);color:var(--r);font-size:11px;font-weight:800;display:flex;align-items:center;justify-content:center;margin-top:1px}
+.hoso-item input[type=file]{font-size:11.5px;color:var(--k3);max-width:100%}
+.hoso-item input[type=file]::file-selector-button{font-family:var(--ff);font-size:11px;font-weight:700;color:var(--r);background:var(--rl);border:1px solid rgba(209,32,38,.25);border-radius:8px;padding:6px 11px;margin-right:9px;cursor:pointer;transition:background .15s}
+.hoso-item input[type=file]::file-selector-button:hover{background:var(--rl);filter:brightness(.97)}
+.consent{display:flex;gap:9px;align-items:flex-start;margin:4px 0 18px}
+.consent input{margin-top:2px;width:15px;height:15px;accent-color:var(--r);flex-shrink:0}
+.consent label{font-size:11.5px;color:var(--k3);line-height:1.5}
+.modal .btn{width:100%;justify-content:center}
+.modal-alt{text-align:center;font-size:12px;color:var(--k3);margin-top:14px;line-height:1.6}
+.modal-alt a{color:var(--r);font-weight:700}
+.modal-success{display:none;text-align:center;padding:44px 30px}
+.modal-success.show{display:block}
+.ms-ic{width:70px;height:70px;border-radius:50%;background:var(--grad);display:flex;align-items:center;justify-content:center;margin:0 auto 18px;box-shadow:var(--shadow-r)}
+.ms-ic svg{width:32px;height:32px;stroke:#fff;fill:none;stroke-width:3}
+.modal-success h3{font-size:22px;font-weight:800;color:var(--k);margin-bottom:10px}
+.modal-success p{font-size:14px;color:var(--k2);line-height:1.6;margin-bottom:6px}
+body.modal-lock{overflow:hidden}
+
+/* ══ RESPONSIVE ══ */
+@media(max-width:960px){
+  .hero{grid-template-columns:1fr;min-height:auto}
+  .hero-l{padding:64px 40px 52px;background:radial-gradient(120% 80% at 50% 0%,var(--rxl) 0%,var(--w) 70%)}
+  .hero-l::before{display:none}
+  .hero-r{height:380px}
+  .innsbruck-strip{height:230px;border-radius:18px}
+  .dest{padding:44px 0 0}
+  .kf-grid{grid-template-columns:1fr 1fr;gap:12px;margin:-28px 0 0}
+  .kf,.kf:first-child,.kf:last-child{border-radius:18px!important;border-left:1px solid var(--bd)}
+  .kf:nth-child(5){grid-column:span 2}
+  .ql-grid,.i3-grid{grid-template-columns:1fr}
+  .slide{width:300px;height:250px}
+  .cta-g{grid-template-columns:1fr}
+  .foot-in{flex-direction:column;align-items:flex-start}
+  .fl-right,.fl-row{text-align:left;justify-content:flex-start}
+  .hmb{display:flex}
+  nav{position:absolute;top:100%;left:0;right:0;background:var(--w);border-bottom:1px solid var(--bd);box-shadow:var(--shadow);flex-direction:column;padding:8px 24px 14px;display:none}
+  nav.open{display:flex}
+  nav a{margin-left:0;padding:13px 4px;font-size:15px;border-bottom:1px solid var(--sf)}
+  nav a:last-child{border-bottom:none}
+  nav a::after{display:none}
+}
+@media(max-width:540px){
+  .wrap{padding:0 24px}
+  .hdr{padding:0 24px}
+  .h-stats{grid-template-columns:1fr 1fr}
+  .hst:nth-child(2){border-left:none}
+  .hst:nth-child(3),.hst:nth-child(4){border-top:1px solid var(--bd)}
+  .hst:nth-child(4){border-left:none}
+  .kf-grid{grid-template-columns:1fr}
+  .kf:nth-child(5){grid-column:span 1}
+  .row2{grid-template-columns:1fr}
+  .modal{padding:16px 12px}
+}
+@media(prefers-reduced-motion:reduce){
+  *{animation:none!important;transition:none!important}
+  .rv{opacity:1;transform:none}
+}
+</style>
+</head>
+<body>
+
+<div id="progress"></div>
+
+<!-- HEADER -->
+<header>
+  <div class="hdr">
+    <a href="#"><img src="PNE logo2.png" alt="Phuong Nam Education" style="height:38px"/></a>
+    <nav id="nav">
+      <a href="#quyen-loi">Quyền lợi</a>
+      <a href="#dieu-kien">Điều kiện</a>
+      <a href="#ho-so">Hồ sơ</a>
+      <a href="#lien-he">Liên hệ</a>
+    </nav>
+    <div class="hdr-right">
+      <button class="hmb" id="hmb" type="button" aria-label="Mở menu" aria-expanded="false"><span></span><span></span><span></span></button>
+      <a class="btn btn-r js-open-form" href="#lien-he" style="font-size:13.5px;padding:11px 22px">Đăng ký ngay →</a>
+    </div>
+  </div>
+</header>
+
+<!-- ══ HERO ══ -->
+<div class="hero">
+  <div class="hero-l">
+    <span class="hero-l-bar"></span>
+    <div class="blob blob-1"></div>
+    <div class="blob blob-2"></div>
+
+    <div class="h-badge rv">
+      <span class="dot"></span>
+      Thông báo xét tuyển
+    </div>
+
+    <h1 class="h1 rv d1">
+      Học bổng ngành
+      <span class="r">Điều dưỡng tại Áo</span>
+    </h1>
+
+    <div class="h-rule rv d1">TUYỂN SINH 2026</div>
+
+    <p class="h-desc rv d2">Học bổng được tài trợ bởi các đơn vị thuộc hệ thống y tế của Nhà nước tại bang Tirol, Áo và Phuong Nam Education phối hợp triển khai tại Việt Nam.</p>
+
+    <div class="h-loc rv d2">
+      <span class="h-loc-flag">🇦🇹</span>
+      <div class="h-loc-text">
+        <span class="h-loc-label">Điểm đến</span>
+        <span class="h-loc-val">Bang Tirol, Cộng hòa Áo</span>
+      </div>
+    </div>
+
+    <div class="h-ctas rv d2">
+      <a class="btn btn-r js-open-form" href="#lien-he">Ứng tuyển ngay</a>
+    </div>
+
+    <div class="h-stats rv d3">
+      <div class="hst"><div class="hst-v" data-count="100" data-suffix="%">100%</div><div class="hst-l">Chi phí đào tạo tại Việt Nam</div></div>
+      <div class="hst"><div class="hst-v">2.800€</div><div class="hst-l">Lương / tháng tại Áo</div></div>
+      <div class="hst"><div class="hst-v" data-count="14">14</div><div class="hst-l">Tháng lương / năm</div></div>
+      <div class="hst"><div class="hst-v">5 năm</div><div class="hst-l">Lộ trình định cư</div></div>
+    </div>
+  </div>
+
+  <div class="hero-r">
+    <img id="imgNurse" class="nurse-img" alt="Điều dưỡng viên châu Á"/>
+    <div class="nurse-cap rv d3">
+      <span class="nc-dot"></span>
+      <div>
+        <div class="nc-label">Tuyển sinh 2026</div>
+        <div class="nc-val">Đang nhận hồ sơ</div>
+      </div>
+    </div>
+    <div class="nurse-pin rv d4"><svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>Innsbruck, Tirol</div>
+  </div>
+</div>
+
+<!-- ══ ĐIỂM ĐẾN + KEY FACTS ══ -->
+<section class="dest">
+  <div class="wrap">
+    <div class="innsbruck-strip">
+      <img id="imgInn" alt="Innsbruck, bang Tirol, Cộng hòa Áo"/>
+      <div class="innsbruck-caption">
+        <div class="inn-tag">🇦🇹 Điểm đến · Bang Tirol</div>
+        <div class="inn-city">Innsbruck, Cộng hòa Áo</div>
+        <div class="inn-desc">Trung tâm văn hóa &amp; y tế hàng đầu Châu Âu — nơi bạn bắt đầu sự nghiệp</div>
+      </div>
+    </div>
+    <div class="kf-grid">
+    <div class="kf rv">
+      <div class="kf-ic"><svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg></div>
+      <div><div class="kf-v">Bang Tirol, Áo</div><div class="kf-l">Đơn vị tài trợ</div></div>
+    </div>
+    <div class="kf rv d1">
+      <div class="kf-ic"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg></div>
+      <div><div class="kf-v">15 – 18 tháng</div><div class="kf-l">Đào tạo tại Việt Nam</div></div>
+    </div>
+    <div class="kf rv d2">
+      <div class="kf-ic"><svg viewBox="0 0 24 24"><path d="M12 1v22M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg></div>
+      <div><div class="kf-v">100% học phí</div><div class="kf-l">Tài trợ trong chương trình</div></div>
+    </div>
+    <div class="kf rv d3">
+      <div class="kf-ic"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
+      <div><div class="kf-v">2.800 EUR/tháng</div><div class="kf-l">Lương khởi điểm tại Áo</div></div>
+    </div>
+    <div class="kf rv d4">
+      <div class="kf-ic"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+      <div><div class="kf-v">Miễn phí xét tuyển</div><div class="kf-l">Không thu bất kỳ khoản phí</div></div>
+    </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ QUYỀN LỢI ══ -->
+<section id="quyen-loi" class="bg-sf">
+  <div class="wrap">
+    <div class="ql-hd rv">
+      <div class="sec-ew">Quyền lợi học bổng</div>
+      <div class="ql-t">Một lộ trình, hai giai đoạn — từ Việt Nam đến Áo.</div>
+      <div class="ql-line"></div>
+    </div>
+    <div class="ql-grid">
+      <div class="ql-card rv">
+        <div class="ql-tag">Giai đoạn 1 · Tại Việt Nam (15–18 tháng)</div>
+        <div class="ql-num">100%</div>
+        <div class="ql-sub">Tài trợ 100% chi phí tham gia chương trình tại Việt Nam</div>
+        <div class="ql-list">
+          <div class="ql-item"><div class="ql-dot"></div><span>Khóa tiếng Đức từ <b>A1 đến B2</b></span></div>
+          <div class="ql-item"><div class="ql-dot"></div><span>Khóa luyện thi &amp; lệ phí thi chứng chỉ <b>ÖSD B2</b> (01 lần)</span></div>
+          <div class="ql-item"><div class="ql-dot"></div><span>Khóa tiếng Đức chuyên ngành <b>Điều dưỡng cơ bản</b></span></div>
+          <div class="ql-item"><div class="ql-dot"></div><span>Khóa <b>đào tạo Điều dưỡng ngắn hạn</b></span></div>
+          <div class="ql-item"><div class="ql-dot"></div><span>Hồ sơ, lệ phí visa, <b>vé máy bay một chiều</b> &amp; bảo hiểm ban đầu</span></div>
+        </div>
+      </div>
+      <div class="ql-card rv d1">
+        <div class="ql-tag">Giai đoạn 2 · Tại Cộng hòa Áo</div>
+        <div class="ql-num">2.800€</div>
+        <div class="ql-sub">Khởi đầu sự nghiệp điều dưỡng tại Áo — nhận lương ổn định ngay từ tháng đầu tiên</div>
+        <div class="ql-list">
+          <div class="ql-item"><div class="ql-dot"></div><span>Nhận <b>bằng tốt nghiệp quốc tế</b>, cơ hội học lên cao</span></div>
+          <div class="ql-item"><div class="ql-dot"></div><span><b>Hợp đồng dài hạn</b> tại hệ thống y tế nhà nước Áo</span></div>
+          <div class="ql-item"><div class="ql-dot"></div><span>Cam kết nhận tối thiểu <b>14 tháng lương/năm</b></span></div>
+          <div class="ql-item"><div class="ql-dot"></div><span>Nghỉ hưởng lương <b>5 – 6 tuần phép/năm</b></span></div>
+          <div class="ql-item"><div class="ql-dot"></div><span>Hỗ trợ sắp xếp nhà ở; <b>cơ hội định cư dài hạn</b> sau 5 năm</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ SLIDER CUỘC SỐNG & SỰ NGHIỆP ══ -->
+<section class="ph-section">
+  <div class="wrap">
+    <div class="ph-head rv">
+      <div class="sec-ew">Cuộc sống &amp; Sự nghiệp tại Áo</div>
+      <div class="sec-t" style="text-align:center">Mở ra sự nghiệp và cuộc sống mới tại Áo.</div>
+    </div>
+  </div>
+  <div class="slider rv">
+    <div class="slider-track" id="sliderTrack"></div>
+  </div>
+</section>
+
+<!-- ══ 3-COL: ĐIỀU KIỆN / HỒ SƠ / LIÊN HỆ ══ -->
+<section class="info3">
+  <div class="wrap">
+    <div class="i3-grid">
+      <div class="i3c rv" id="dieu-kien">
+        <div class="i3-tag">01 · Điều kiện xét tuyển</div>
+        <div class="i3-title">Bạn có phù hợp?</div>
+        <div class="i3-list">
+          <div class="i3-item">
+            <div class="i3-ic"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+            <div>Học sinh chuẩn bị hoặc đã tốt nghiệp THPT có <b>hạnh kiểm Tốt</b>.</div>
+          </div>
+          <div class="i3-item">
+            <div class="i3-ic"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+            <div>Điểm trung bình môn Tiếng Anh THPT đạt từ <b>7.0 trở lên</b> hoặc có chứng chỉ <b>IELTS 5.0</b> (hoặc tương đương).</div>
+          </div>
+          <div class="i3-item">
+            <div class="i3-ic"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+            <div>Có định hướng học tập, phát triển nghề nghiệp trong ngành Điều dưỡng và mong muốn làm việc, định cư lâu dài tại Áo.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="i3c rv d1" id="ho-so">
+        <div class="i3-tag">02 · Hồ sơ dự tuyển</div>
+        <div class="i3-title">Chuẩn bị trong 30 phút</div>
+        <div class="i3-list">
+          <div class="i3-item"><div class="i3-ic"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div><span>Sơ yếu lý lịch (có ảnh)</span></div>
+          <div class="i3-item"><div class="i3-ic"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div><span>Bản sao CCCD hoặc Hộ chiếu</span></div>
+          <div class="i3-item"><div class="i3-ic"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div><span>Bản sao Học bạ hoặc Sổ liên lạc</span></div>
+          <div class="i3-item"><div class="i3-ic"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div><div>Bằng tốt nghiệp THPT hoặc Giấy chứng nhận tốt nghiệp tạm thời (có thể bổ sung sau)</div></div>
+          <div class="i3-item"><div class="i3-ic"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div><span>Chứng chỉ, giải thưởng, thành tích khác (nếu có)</span></div>
+        </div>
+      </div>
+
+      <div class="i3c rv d2" id="lien-he">
+        <div class="i3-tag">03 · Nộp hồ sơ dự tuyển</div>
+        <div class="i3-title">Hạn chót &amp; Liên hệ</div>
+        <div class="i3-dl">30/08/2026</div>
+        <div class="i3-dl-note">Ưu tiên xét tuyển ứng viên đăng ký sớm.</div>
+        <a class="btn btn-r js-open-form" href="#" style="width:100%;justify-content:center;margin-bottom:16px">Đăng ký tư vấn ngay →</a>
+        <div class="i3-cr"><svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.85 19.79 19.79 0 01.34 1.18 2 2 0 012.33 0h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L6.91 7.91a16 16 0 006.16 6.16l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"/></svg><b>1900 7060</b><span>· (028) 3622 8849</span></div>
+        <div class="i3-cr"><svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg><span>357 Lê Hồng Phong, P. Vườn Lài, TP. HCM</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ CTA ══ -->
+<div class="cta-s">
+  <div class="wrap">
+    <div class="cta-g">
+      <div class="rv">
+        <h2 class="cta-t">Đặt nền móng cho sự nghiệp của bạn tại Cộng hòa Áo.</h2>
+        <p class="cta-d">Học bổng toàn phần — không phí đào tạo, không phí dự tuyển. Từ tiếng Đức A1 đến 2.800€/tháng tại Tirol.</p>
+        <div class="cta-btns">
+          <a class="btn btn-r" href="tel:19007060">Gọi: 1900 7060</a>
+          <a class="btn btn-o" href="tel:02836228849">(028) 3622 8849</a>
+        </div>
+      </div>
+      <div class="cta-box rv d1">
+        <div class="cbox-l">Hạn nộp hồ sơ</div>
+        <div class="cbox-d">30/08/2026</div>
+        <div class="cbox-n">Ưu tiên đăng ký sớm · Miễn phí</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ FOOTER ══ -->
+<div class="foot">
+  <div class="wrap">
+    <div class="foot-in">
+      <div class="fl-logo">
+        <img src="PNE logo2.png" alt="PNE"/>
+        <div><div class="fn">Phuong Nam Education</div><div class="fs">357 Lê Hồng Phong, P. Vườn Lài, TP. HCM</div></div>
+      </div>
+      <div class="fl-right">
+        <div class="fl-row"><b>Hotline:</b><span>1900 7060</span></div>
+        <div class="fl-row"><b>Tel:</b><span>(028) 3622 8849</span></div>
+        <div class="fl-row"><span>Học bổng Điều dưỡng Áo 2026 · Bang Tirol</span></div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="fcopy"><div class="wrap">© 2026 Phuong Nam Education · Học bổng tài trợ bởi Hệ thống Y tế Nhà nước bang Tirol, Cộng hòa Áo</div></div>
+
+<!-- ══ MODAL ĐĂNG KÝ ══ -->
+<div class="modal" id="regModal" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="regTitle">
+  <div class="modal-bg" data-close></div>
+  <div class="modal-card">
+    <div class="modal-head">
+      <button class="modal-x" type="button" data-close aria-label="Đóng">&times;</button>
+      <div class="eb">Học bổng Điều dưỡng Áo 2026</div>
+      <h3 id="regTitle">Đăng ký tư vấn miễn phí</h3>
+      <p>Để lại thông tin — PNE sẽ liên hệ sớm nhất có thể. Không thu phí dự tuyển.</p>
+    </div>
+    <div class="modal-body">
+      <form id="regForm" novalidate>
+        <div class="fld"><label>Họ và tên <span class="req">*</span></label><input name="hoten" type="text" required autocomplete="name" placeholder="Nguyễn Văn A"/></div>
+        <div class="row2">
+          <div class="fld"><label>Số điện thoại <span class="req">*</span></label><input name="sdt" type="tel" required autocomplete="tel" placeholder="09xx xxx xxx"/></div>
+          <div class="fld"><label>Email</label><input name="email" type="email" autocomplete="email" placeholder="email@gmail.com"/></div>
+        </div>
+        <div class="row2">
+          <div class="fld"><label>Tỉnh / Thành phố</label><input name="tinh" type="text" placeholder="TP. HCM"/></div>
+          <div class="fld"><label>Trình độ tiếng Đức</label><select name="trinhdo_duc"><option value="Chưa có">Chưa có</option><option>A1</option><option>A2</option><option>B1</option><option>B2</option></select></div>
+        </div>
+        <div class="fld"><label>Nội dung cần tư vấn</label><textarea name="noidung" placeholder="Câu hỏi của bạn (không bắt buộc)"></textarea></div>
+
+        <label class="toggle-line" for="wantHoso"><input type="checkbox" id="wantHoso"/><span><b>Tôi muốn nộp hồ sơ dự tuyển ngay.</b> Mở danh mục hồ sơ và tải lên từng mục.</span></label>
+        <div class="hoso" id="hosoBox">
+          <div class="hoso-note">Tải lên từng mục (ảnh hoặc PDF). Mục chưa có thể bổ sung sau — không bắt buộc đủ ngay.</div>
+          <label class="hoso-item"><span class="hoso-lbl"><span class="hoso-no">1</span>Sơ yếu lý lịch (có ảnh)</span><input type="file" data-doc="Sơ yếu lý lịch" accept="image/*,application/pdf"/></label>
+          <label class="hoso-item"><span class="hoso-lbl"><span class="hoso-no">2</span>Bản sao CCCD hoặc Hộ chiếu</span><input type="file" data-doc="CCCD/Hộ chiếu" accept="image/*,application/pdf"/></label>
+          <label class="hoso-item"><span class="hoso-lbl"><span class="hoso-no">3</span>Bản sao Học bạ hoặc Sổ liên lạc</span><input type="file" data-doc="Học bạ/Sổ liên lạc" accept="image/*,application/pdf"/></label>
+          <label class="hoso-item"><span class="hoso-lbl"><span class="hoso-no">4</span>Bằng tốt nghiệp THPT hoặc Giấy CN tốt nghiệp tạm thời</span><input type="file" data-doc="Bằng/Giấy CN tốt nghiệp" accept="image/*,application/pdf"/></label>
+          <label class="hoso-item"><span class="hoso-lbl"><span class="hoso-no">5</span>Chứng chỉ, giải thưởng, thành tích khác (nếu có)</span><input type="file" data-doc="Chứng chỉ/Thành tích" multiple accept="image/*,application/pdf"/></label>
+        </div>
+
+        <div class="consent"><input type="checkbox" id="consent" required/><label for="consent">Tôi đồng ý để Phuong Nam Education liên hệ tư vấn về chương trình.</label></div>
+
+        <button class="btn btn-r" type="submit">Gửi đăng ký →</button>
+        <div class="modal-alt">Hoặc gọi ngay hotline <a href="tel:19007060">1900 7060</a></div>
+      </form>
+
+      <div class="modal-success" id="regSuccess">
+        <div class="ms-ic"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+        <h3>Đã gửi đăng ký!</h3>
+        <p>Cảm ơn bạn. PNE sẽ liên hệ sớm nhất có thể để tư vấn chi tiết.</p>
+        <p>Cần gấp? Gọi <a href="tel:19007060" style="color:var(--r);font-weight:700">1900 7060</a>.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+(function(){
+  const D = '[HBAT] Hình ảnh cho Phụ san Giáo dục (06.2026)/';
+  const imgs = {
+    imgNurse: 'web-img/hero.jpg',
+    imgInn:   'web-img/innsbruck.jpg',
+  };
+  Object.entries(imgs).forEach(([id,src])=>{
+    const el=document.getElementById(id);
+    if(el) el.src=encodeURI(src);
+  });
+
+  /* ===== Slider tự động chạy (marquee) ===== */
+  const slides = [
+    ['web-img/s1.jpg',        'Tại Việt Nam',   'Đào tạo tiếng Đức &amp; chuẩn bị hồ sơ'],
+    ['web-img/s2.jpg',        'Đồng nghiệp',    'Điều dưỡng viên tại Cộng hòa Áo'],
+    ['web-img/innsbruck.jpg', 'Tirol, Áo',      'Sinh sống tại thành phố Innsbruck'],
+    ['web-img/s4.jpg',        'Nơi làm việc',   'Cơ sở y tế tại bang Tirol'],
+    ['web-img/s5.jpg',        'Môi trường',     'Cơ sở chăm sóc hiện đại'],
+    ['web-img/s6.jpg',        'Trang thiết bị', 'Bệnh viện chuẩn Châu Âu'],
+    ['web-img/s7.jpg',        'Sự nghiệp',      'Khởi đầu nghề điều dưỡng tại Áo'],
+  ];
+  const track = document.getElementById('sliderTrack');
+  if(track){
+    const build = ()=> slides.map(([src,tag,cap])=>
+      `<div class="slide"><img loading="lazy" src="${encodeURI(src)}" alt="${cap}"/>`+
+      `<div class="ph-overlay"></div><div class="ph-info"><div class="ph-num">${tag}</div>`+
+      `<div class="ph-cap">${cap}</div></div></div>`).join('');
+    track.innerHTML = build() + build(); /* nhân đôi để chạy lặp liền mạch */
+  }
+})();
+
+/* Reveal on scroll */
+const io=new IntersectionObserver(es=>es.forEach(e=>{
+  if(e.isIntersecting){e.target.classList.add('on');io.unobserve(e.target)}
+}),{threshold:.08});
+document.querySelectorAll('.rv').forEach(el=>io.observe(el));
+setTimeout(()=>document.querySelectorAll('.hero .rv').forEach(el=>el.classList.add('on')),60);
+
+/* Scroll progress bar */
+const bar=document.getElementById('progress');
+const onScroll=()=>{
+  const h=document.documentElement;
+  const sc=h.scrollTop/((h.scrollHeight-h.clientHeight)||1);
+  bar.style.width=(sc*100)+'%';
+};
+window.addEventListener('scroll',onScroll,{passive:true});onScroll();
+
+/* Count-up for numeric stats */
+function countUp(el){
+  const target=parseFloat(el.dataset.count);
+  const suffix=el.dataset.suffix||'';
+  const dur=1100;const t0=performance.now();
+  function step(now){
+    const p=Math.min((now-t0)/dur,1);
+    const eased=1-Math.pow(1-p,3);
+    el.textContent=Math.round(target*eased)+suffix;
+    if(p<1)requestAnimationFrame(step);
+  }
+  requestAnimationFrame(step);
+}
+const cio=new IntersectionObserver(es=>es.forEach(e=>{
+  if(e.isIntersecting){countUp(e.target);cio.unobserve(e.target)}
+}),{threshold:.5});
+document.querySelectorAll('[data-count]').forEach(el=>cio.observe(el));
+
+/* ===== Menu mobile (hamburger) ===== */
+const hmb=document.getElementById('hmb'),navEl=document.getElementById('nav');
+hmb.addEventListener('click',()=>{const open=navEl.classList.toggle('open');hmb.classList.toggle('x',open);hmb.setAttribute('aria-expanded',open);});
+navEl.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{navEl.classList.remove('open');hmb.classList.remove('x');hmb.setAttribute('aria-expanded','false');}));
+
+/* ===== Modal đăng ký — 2 phương án nhận dữ liệu, cùng 1 payload =====
+   - gas:   URL Google Apps Script (.../exec) — xem "huong-dan-ket-noi-google-sheet.md"
+   - admin: URL API trang admin PNE (vd https://admin.phuongnameducation.com/api/public/applications)
+   Điền 1 trong 2 để dùng phương án đó; điền CẢ HAI để gửi song song (giai đoạn chuyển tiếp).
+   Để trống cả hai = chạy demo (chỉ hiện màn hình cảm ơn). */
+const ENDPOINTS = {
+  gas:   "",
+  admin: ""
+};
+function toBase64(file){return new Promise((res,rej)=>{const r=new FileReader();r.onload=()=>res(String(r.result).split(',')[1]);r.onerror=rej;r.readAsDataURL(file);});}
+const modal=document.getElementById('regModal');
+const regForm=document.getElementById('regForm');
+const regSuccess=document.getElementById('regSuccess');
+function openModal(e){if(e)e.preventDefault();modal.classList.add('open');modal.setAttribute('aria-hidden','false');document.body.classList.add('modal-lock');const f=regForm.querySelector('input[name=hoten]');if(f)setTimeout(()=>f.focus(),120);}
+function closeModal(){modal.classList.remove('open');modal.setAttribute('aria-hidden','true');document.body.classList.remove('modal-lock');}
+document.querySelectorAll('.js-open-form').forEach(b=>b.addEventListener('click',openModal));
+modal.querySelectorAll('[data-close]').forEach(el=>el.addEventListener('click',closeModal));
+document.addEventListener('keydown',e=>{if(e.key==='Escape'&&modal.classList.contains('open'))closeModal();});
+
+const wantHoso=document.getElementById('wantHoso'),hosoBox=document.getElementById('hosoBox');
+wantHoso.addEventListener('change',()=>hosoBox.classList.toggle('show',wantHoso.checked));
+
+regForm.addEventListener('submit',async e=>{
+  e.preventDefault();
+  let ok=true;
+  regForm.querySelectorAll('[required]').forEach(f=>{
+    const bad=(f.type==='checkbox')?!f.checked:!f.value.trim();
+    f.classList.toggle('err',bad); if(bad)ok=false;
+  });
+  if(!ok)return;
+  const btn=regForm.querySelector('button[type=submit]');
+  btn.textContent='Đang gửi...';btn.disabled=true;
+  try{
+    const targets=[ENDPOINTS.gas, ENDPOINTS.admin].filter(Boolean);
+    if(targets.length){
+      const el=regForm.elements;
+      const data={
+        hoten:el.hoten.value.trim(), sdt:el.sdt.value.trim(), email:el.email.value.trim(),
+        tinh:el.tinh.value.trim(), trinhdo_duc:el.trinhdo_duc.value, noidung:el.noidung.value.trim(),
+        muon_nop_hoso: wantHoso.checked?'Có':'Không', campaign:'dieu-duong-ao-2026', files:[]
+      };
+      const fileInputs=regForm.querySelectorAll('#hosoBox input[type=file]');
+      for(const fi of fileInputs){
+        const doc=fi.dataset.doc||'';
+        for(const file of fi.files){
+          data.files.push({doc, name:(doc?doc+' - ':'')+file.name,type:file.type||'application/octet-stream',data:await toBase64(file)});
+        }
+      }
+      const body=JSON.stringify(data); // text/plain → không bị CORS preflight
+      await Promise.allSettled(targets.map(u=>fetch(u,{method:'POST',body})));
+    }
+  }catch(err){/* vẫn hiển thị cảm ơn — học viên có thể gọi hotline */}
+  regForm.style.display='none';
+  regSuccess.classList.add('show');
+});
+</script>
+</body>
+</html>
