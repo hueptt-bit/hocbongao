@@ -157,7 +157,7 @@ tr.clk{cursor:pointer}tr.clk:hover td{background:var(--rxl)}
 </div>
 
 <script src="supabase-config.js"></script>
-<script src="admin-data.js?v=2"></script>
+<script src="admin-data.js?v=3"></script>
 <script>
 const esc=s=>String(s==null?'':s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 const toast=m=>{const t=document.getElementById('toast');t.textContent=m;t.classList.add('show');clearTimeout(t._);t._=setTimeout(()=>t.classList.remove('show'),2200);};
@@ -480,16 +480,28 @@ function renderRoles(){
   const matrix=`<div class="tbl-wrap"><table><thead><tr><th>Chức năng</th><th>Admin</th><th>Biên tập</th><th>Tư vấn</th><th>Chỉ xem</th></tr></thead><tbody>${feats.map(([f,m])=>`<tr><td>${f}</td><td>${yn(m.admin)}</td><td>${yn(m.editor)}</td><td>${yn(m.consultant)}</td><td>${yn(m.viewer)}</td></tr>`).join('')}</tbody></table></div>`;
   document.getElementById('sec-roles').innerHTML=`
     <div class="panel"><h2>Tài khoản quản trị</h2>
-      <div class="toolbar"><input id="nu_name" class="search" placeholder="Họ tên"/><input id="nu_email" class="search" placeholder="Email đăng nhập"/>
+      <div class="toolbar"><input id="nu_name" class="search" placeholder="Họ tên"/><input id="nu_email" type="email" class="search" placeholder="Email đăng nhập"/>
+        <input id="nu_pw" type="password" class="search" placeholder="Mật khẩu (≥6 ký tự)"/>
         <select id="nu_role" style="width:auto;padding:10px 12px">${Object.keys(ROLE_LABEL).map(r=>`<option value="${r}">${ROLE_LABEL[r]}</option>`).join('')}</select>
-        <button class="btn pri" onclick="addUser()">+ Thêm tài khoản</button></div>
+        <button class="btn pri" id="addUserBtn" onclick="addUser()">+ Thêm tài khoản</button></div>
       <div class="tbl-wrap"><table><thead><tr><th>Người dùng</th><th>Vai trò</th><th>Trạng thái</th><th></th></tr></thead><tbody>${rows}</tbody></table></div></div>
     <div class="panel"><h2>Quyền theo vai trò</h2>${matrix}
-      <p class="muted" style="font-size:12px;margin-top:10px">Khi chạy thật, quyền được Supabase RLS thực thi theo tài khoản đăng nhập (email gắn vai trò) — không thể vượt qua bằng giao diện.</p></div>`;
+      <p class="muted" style="font-size:12px;margin-top:10px">Thêm tài khoản ở đây sẽ tạo luôn <b>đăng nhập (email + mật khẩu)</b> và gán vai trò. Quyền được Supabase RLS thực thi theo tài khoản đăng nhập — không thể vượt qua bằng giao diện.</p></div>`;
 }
 function setUserRole(id,v){const u=users.find(x=>x.id===id);u.role=v;persist('user',u);toast(BACKEND?'Đã đổi vai trò':'Đã đổi vai trò (xem thử)');}
 function toggleUser(id){const u=users.find(x=>x.id===id);u.status=u.status==='Hoạt động'?'Tạm khóa':'Hoạt động';persist('user',u);renderRoles();}
-function addUser(){const n=document.getElementById('nu_name').value.trim(),e=document.getElementById('nu_email').value.trim(),r=document.getElementById('nu_role').value;if(!n||!e)return toast('Nhập họ tên và email');const u={id:(BACKEND&&PNE.uid)?PNE.uid():'u'+Date.now(),name:n,email:e,role:r,status:'Hoạt động'};users.push(u);persist('user',u);toast(BACKEND?'Đã thêm vai trò. Nhớ tạo tài khoản đăng nhập (email+mật khẩu) cho email này trong Supabase → Authentication.':'Đã thêm tài khoản (xem thử)');renderRoles();}
+async function addUser(){
+  const n=document.getElementById('nu_name').value.trim(),e=document.getElementById('nu_email').value.trim(),pw=document.getElementById('nu_pw').value,r=document.getElementById('nu_role').value;
+  if(!n||!e)return toast('Nhập họ tên và email');
+  if(!BACKEND){users.push({id:'u'+Date.now(),name:n,email:e,role:r,status:'Hoạt động'});toast('Đã thêm tài khoản (xem thử)');renderRoles();return;}
+  if(!pw||pw.length<6)return toast('Nhập mật khẩu từ 6 ký tự trở lên');
+  const btn=document.getElementById('addUserBtn');btn.disabled=true;btn.textContent='Đang tạo...';
+  try{
+    await PNE.createAdminUser({name:n,email:e,password:pw,role:r});
+    toast('Đã tạo tài khoản đăng nhập + gán vai trò');
+    users=await PNE.listUsers();renderRoles();
+  }catch(ex){toast('Lỗi: '+(ex.message||ex));const b=document.getElementById('addUserBtn');if(b){b.disabled=false;b.textContent='+ Thêm tài khoản';}}
+}
 
 /* ===== Kết nối Supabase (backend) ===== */
 let BACKEND=false;

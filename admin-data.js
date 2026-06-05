@@ -114,6 +114,18 @@
 
   const listUsers = async () => (await rest("admin_users?select=*&order=created_at.desc") || []).map((u) => ({ id: u.id, name: u.name, email: u.email, role: u.role, status: u.status }));
   const saveUser = (u) => upsert("admin_users", { id: u.id, name: u.name, email: u.email, role: u.role, status: u.status });
+  // Tạo TÀI KHOẢN ĐĂNG NHẬP (email+mật khẩu) + gán vai trò — qua Edge Function (giữ service_role ở máy chủ)
+  async function createAdminUser(payload) {
+    const res = await fetch(`${cfg.url}/functions/v1/create-admin-user`, {
+      method: "POST",
+      headers: { apikey: cfg.anonKey, Authorization: `Bearer ${token() || cfg.anonKey}`, "Content-Type": "application/json" },
+      body: JSON.stringify(payload),
+    });
+    let j = {};
+    try { j = await res.json(); } catch (e) {}
+    if (!res.ok) throw new Error(j.error || `Lỗi ${res.status}`);
+    return j;
+  }
 
   /* ---------- CMS landing_content ---------- */
   async function cmsGet(id) {
@@ -153,7 +165,7 @@
   window.PNE = {
     enabled, session, signIn, signOut,
     listConsult, listApply, saveConsult, saveApply, submitConsult, submitApply, delConsult, delApply,
-    listUsers, saveUser,
+    listUsers, saveUser, createAdminUser,
     cmsGetDraft: () => cmsGet("draft"), cmsGetPublished: () => cmsGet("published"), cmsSaveDraft, cmsPublish,
     uploadHoSo: (path, file) => uploadFile("ho-so", path, file),
     uploadLanding: (path, file) => uploadFile("landing", path, file),
