@@ -157,7 +157,7 @@ tr.clk{cursor:pointer}tr.clk:hover td{background:var(--rxl)}
 </div>
 
 <script src="supabase-config.js"></script>
-<script src="admin-data.js"></script>
+<script src="admin-data.js?v=2"></script>
 <script>
 const esc=s=>String(s==null?'':s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 const toast=m=>{const t=document.getElementById('toast');t.textContent=m;t.classList.add('show');clearTimeout(t._);t._=setTimeout(()=>t.classList.remove('show'),2200);};
