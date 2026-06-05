@@ -633,8 +633,8 @@ body.modal-lock{overflow:hidden}
 (function(){
   const D = '[HBAT] Hình ảnh cho Phụ san Giáo dục (06.2026)/';
   const imgs = {
-    imgNurse: 'web-img/hero.jpg',
-    imgInn:   'web-img/innsbruck.jpg',
+    imgNurse: 'hero.jpg',
+    imgInn:   'innsbruck.jpg',
   };
   Object.entries(imgs).forEach(([id,src])=>{
     const el=document.getElementById(id);
@@ -643,13 +643,13 @@ body.modal-lock{overflow:hidden}
 
   /* ===== Slider tự động chạy (marquee) ===== */
   const slides = [
-    ['web-img/s1.jpg',        'Tại Việt Nam',   'Đào tạo tiếng Đức &amp; chuẩn bị hồ sơ'],
-    ['web-img/s2.jpg',        'Đồng nghiệp',    'Điều dưỡng viên tại Cộng hòa Áo'],
-    ['web-img/innsbruck.jpg', 'Tirol, Áo',      'Sinh sống tại thành phố Innsbruck'],
-    ['web-img/s4.jpg',        'Nơi làm việc',   'Cơ sở y tế tại bang Tirol'],
-    ['web-img/s5.jpg',        'Môi trường',     'Cơ sở chăm sóc hiện đại'],
-    ['web-img/s6.jpg',        'Trang thiết bị', 'Bệnh viện chuẩn Châu Âu'],
-    ['web-img/s7.jpg',        'Sự nghiệp',      'Khởi đầu nghề điều dưỡng tại Áo'],
+    ['s1.jpg',        'Tại Việt Nam',   'Đào tạo tiếng Đức &amp; chuẩn bị hồ sơ'],
+    ['s2.jpg',        'Đồng nghiệp',    'Điều dưỡng viên tại Cộng hòa Áo'],
+    ['innsbruck.jpg', 'Tirol, Áo',      'Sinh sống tại thành phố Innsbruck'],
+    ['s4.jpg',        'Nơi làm việc',   'Cơ sở y tế tại bang Tirol'],
+    ['s5.jpg',        'Môi trường',     'Cơ sở chăm sóc hiện đại'],
+    ['s6.jpg',        'Trang thiết bị', 'Bệnh viện chuẩn Châu Âu'],
+    ['s7.jpg',        'Sự nghiệp',      'Khởi đầu nghề điều dưỡng tại Áo'],
   ];
   const track = document.getElementById('sliderTrack');
   if(track){
