@@ -629,6 +629,9 @@ body.modal-lock{overflow:hidden}
   </div>
 </div>
 
+<script src="supabase-config.js"></script>
+<script src="supabase-client.js"></script>
+<script src="admin-data.js"></script>
 <script>
 (function(){
   const D = '[HBAT] Hình ảnh cho Phụ san Giáo dục (06.2026)/';
@@ -700,16 +703,70 @@ const hmb=document.getElementById('hmb'),navEl=document.getElementById('nav');
 hmb.addEventListener('click',()=>{const open=navEl.classList.toggle('open');hmb.classList.toggle('x',open);hmb.setAttribute('aria-expanded',open);});
 navEl.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{navEl.classList.remove('open');hmb.classList.remove('x');hmb.setAttribute('aria-expanded','false');}));
 
-/* ===== Modal đăng ký — 2 phương án nhận dữ liệu, cùng 1 payload =====
-   - gas:   URL Google Apps Script (.../exec) — xem "huong-dan-ket-noi-google-sheet.md"
-   - admin: URL API trang admin PNE (vd https://admin.phuongnameducation.com/api/public/applications)
-   Điền 1 trong 2 để dùng phương án đó; điền CẢ HAI để gửi song song (giai đoạn chuyển tiếp).
-   Để trống cả hai = chạy demo (chỉ hiện màn hình cảm ơn). */
-const ENDPOINTS = {
-  gas:   "",
-  admin: ""
-};
+/* ===== Modal đăng ký =====
+   Dữ liệu được gửi vào Google Sheet + lưu hồ sơ vào Google Drive qua Apps Script.
+   Dán URL Web App (.../exec) vào GS_ENDPOINT bên dưới — xem file
+   "huong-dan-ket-noi-google-sheet.md". Để trống = chạy demo (chỉ hiện cảm ơn). */
+const GS_ENDPOINT = "";
+const ADMIN_STORAGE_KEY = "hoc-bong-ao-admin-state";
 function toBase64(file){return new Promise((res,rej)=>{const r=new FileReader();r.onload=()=>res(String(r.result).split(',')[1]);r.onerror=rej;r.readAsDataURL(file);});}
+function createId(){return (typeof crypto!=='undefined'&&crypto.randomUUID)?crypto.randomUUID():'lead-'+Date.now()+'-'+Math.random().toString(16).slice(2);}
+function addLeadToAdmin(data){
+  const fileNames=(data.files||[]).map(file=>file.name).join(', ');
+  const leadType=data.muon_nop_hoso==='Có'?'application':'consultation';
+  const noteParts=[
+    data.noidung ? `Nội dung tư vấn: ${data.noidung}` : '',
+    data.tinh ? `Tỉnh/Thành phố: ${data.tinh}` : '',
+    data.trinhdo_duc ? `Trình độ tiếng Đức: ${data.trinhdo_duc}` : '',
+    data.muon_nop_hoso==='Có' ? 'Ứng viên muốn nộp hồ sơ dự tuyển ngay.' : 'Ứng viên đăng ký tư vấn.',
+    fileNames ? `File đã chọn: ${fileNames}` : ''
+  ].filter(Boolean);
+  let state={profiles:[]};
+  try{state={...state,...JSON.parse(localStorage.getItem(ADMIN_STORAGE_KEY)||'{}')};}catch(err){}
+  const profile={
+    id:createId(),
+    leadType,
+    name:data.hoten,
+    email:data.email||'',
+    phone:data.sdt,
+    program:'Học bổng Điều dưỡng Áo 2026',
+    status:leadType==='application'?'Chờ kiểm tra hồ sơ':'Mới',
+    owner:'Chưa phân công',
+    dueDate:new Date(Date.now()+2*24*60*60*1000).toISOString().slice(0,10),
+    note:noteParts.join('\n'),
+    source:'Landing page',
+    submittedAt:new Date().toISOString()
+  };
+  state.profiles=[profile,...(state.profiles||[])];
+  state.activity=[`${leadType==='application'?'Nhận hồ sơ ứng tuyển':'Nhận đăng ký tư vấn'} từ landing: ${data.hoten}`,...(state.activity||[])].slice(0,8);
+  localStorage.setItem(ADMIN_STORAGE_KEY,JSON.stringify(state));
+}
+/* Gửi vào Supabase: tư vấn → consultations; có nộp hồ sơ → applications + tải tệp vào bucket ho-so (private). */
+const STD_DOCS=['Sơ yếu lý lịch','CCCD/Hộ chiếu','Học bạ/Sổ liên lạc','Bằng/Giấy CN tốt nghiệp','Chứng chỉ/Thành tích'];
+async function submitToBackend(data){
+  if(!(window.PNE&&PNE.enabled()))return;
+  const id=PNE.uid();
+  const base={id,name:data.hoten,email:data.email||'',phone:data.sdt,owner:'Chưa phân công',source:'Landing page'};
+  if(data.muon_nop_hoso==='Có'){
+    const docs=STD_DOCS.map(n=>({name:n,uploaded:false,path:''}));
+    const inputs=document.querySelectorAll('#hosoBox input[type=file]');
+    for(const fi of inputs){
+      const label=fi.dataset.doc||'Tài liệu';
+      const slot=docs.find(d=>d.name===label);
+      for(const file of fi.files){
+        const safe=file.name.replace(/[^\w.\-]+/g,'_');
+        const key=id+'/'+label.replace(/[^\w.\-]+/g,'_')+'-'+safe;
+        try{await PNE.uploadHoSo(key,file);if(slot){slot.uploaded=true;slot.path=key;slot.file=file.name;}}catch(e){}
+      }
+    }
+    const rec={...base,status:'Chờ kiểm tra hồ sơ',province:data.tinh||'',level:data.trinhdo_duc||'Chưa có',due:'',docs,
+      notes:data.noidung?[{m:data.noidung,by:'Landing',at:new Date().toLocaleDateString('vi-VN')}]:[]};
+    await PNE.saveApply(rec);
+  }else{
+    const rec={...base,status:'Mới',need:data.noidung||'Đăng ký tư vấn',last:'',notes:[]};
+    await PNE.saveConsult(rec);
+  }
+}
 const modal=document.getElementById('regModal');
 const regForm=document.getElementById('regForm');
 const regSuccess=document.getElementById('regSuccess');
@@ -732,29 +789,72 @@ regForm.addEventListener('submit',async e=>{
   if(!ok)return;
   const btn=regForm.querySelector('button[type=submit]');
   btn.textContent='Đang gửi...';btn.disabled=true;
+  const el=regForm.elements;
+  const data={
+    hoten:el.hoten.value.trim(), sdt:el.sdt.value.trim(), email:el.email.value.trim(),
+    tinh:el.tinh.value.trim(), trinhdo_duc:el.trinhdo_duc.value, noidung:el.noidung.value.trim(),
+    muon_nop_hoso: wantHoso.checked?'Có':'Không', files:[]
+  };
+  const fileInputs=regForm.querySelectorAll('#hosoBox input[type=file]');
+  for(const fi of fileInputs){
+    const doc=fi.dataset.doc||'';
+    for(const file of fi.files){
+      data.files.push({name:(doc?doc+' - ':'')+file.name,type:file.type||'application/octet-stream'});
+    }
+  }
+  addLeadToAdmin(data);
+  try{ await submitToBackend(data); }catch(err){ /* vẫn hiển thị cảm ơn — học viên có thể gọi hotline */ }
   try{
-    const targets=[ENDPOINTS.gas, ENDPOINTS.admin].filter(Boolean);
-    if(targets.length){
-      const el=regForm.elements;
-      const data={
-        hoten:el.hoten.value.trim(), sdt:el.sdt.value.trim(), email:el.email.value.trim(),
-        tinh:el.tinh.value.trim(), trinhdo_duc:el.trinhdo_duc.value, noidung:el.noidung.value.trim(),
-        muon_nop_hoso: wantHoso.checked?'Có':'Không', campaign:'dieu-duong-ao-2026', files:[]
-      };
-      const fileInputs=regForm.querySelectorAll('#hosoBox input[type=file]');
+    if(GS_ENDPOINT){
       for(const fi of fileInputs){
         const doc=fi.dataset.doc||'';
         for(const file of fi.files){
-          data.files.push({doc, name:(doc?doc+' - ':'')+file.name,type:file.type||'application/octet-stream',data:await toBase64(file)});
+          const existing=data.files.find(item=>item.name===(doc?doc+' - ':'')+file.name);
+          if(existing) existing.data=await toBase64(file);
         }
       }
-      const body=JSON.stringify(data); // text/plain → không bị CORS preflight
-      await Promise.allSettled(targets.map(u=>fetch(u,{method:'POST',body})));
+      await fetch(GS_ENDPOINT,{method:'POST',body:JSON.stringify(data)}); // text/plain → không bị CORS preflight
     }
   }catch(err){/* vẫn hiển thị cảm ơn — học viên có thể gọi hotline */}
   regForm.style.display='none';
   regSuccess.classList.add('show');
 });
+</script>
+
+<!-- ===== Áp nội dung đã XUẤT BẢN từ CMS (admin) lên landing ===== -->
+<script>
+(async function(){
+  if(!(window.PNE&&PNE.enabled()))return;
+  let c; try{ c=await PNE.cmsGetPublished(); }catch(e){ return; }
+  if(!c||typeof c!=='object')return;
+  const q=s=>document.querySelector(s),qa=s=>document.querySelectorAll(s);
+  const esc=t=>String(t==null?'':t).replace(/[&<>]/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[m]));
+  const txt=(s,v)=>{const e=q(s);if(e&&v!=null&&v!=='')e.textContent=v;};
+  const CHK='<svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>';
+  try{
+    if(c.hero){const h=c.hero;
+      const b=q('.h-badge');if(b&&h.badge)b.innerHTML='<span class="dot"></span> '+esc(h.badge);
+      const h1=q('.h1');if(h1&&(h.title||h.highlight))h1.innerHTML=esc(h.title||'')+' <span class="r">'+esc(h.highlight||'')+'</span>';
+      txt('.h-desc',h.desc);txt('.h-loc-val',h.location);
+      const cta=q('.h-ctas .btn');if(cta&&h.cta)cta.textContent=h.cta;
+      txt('.nurse-cap .nc-val',h.chip);
+      if(h.image){const im=q('#imgNurse');if(im)im.src=encodeURI(h.image);}
+    }
+    if(Array.isArray(c.stats)){const cells=qa('.h-stats .hst');c.stats.forEach((s,i)=>{const cell=cells[i];if(!cell)return;const v=cell.querySelector('.hst-v'),l=cell.querySelector('.hst-l');if(v&&s.v){v.removeAttribute('data-count');v.textContent=s.v;}if(l&&s.l)l.textContent=s.l;});}
+    if(c.dest){const d=c.dest;if(d.image){const im=q('#imgInn');if(im)im.src=encodeURI(d.image);}if(d.tag)txt('.inn-tag','🇦🇹 '+d.tag.replace(/^🇦🇹\s*/,''));txt('.inn-city',d.city);txt('.inn-desc',d.desc);}
+    const benCards=qa('.ql-card');
+    [['benefit1',0],['benefit2',1]].forEach(([k,i])=>{const b=c[k],card=benCards[i];if(!b||!card)return;const tag=card.querySelector('.ql-tag'),num=card.querySelector('.ql-num'),sub=card.querySelector('.ql-sub'),list=card.querySelector('.ql-list');if(tag&&b.tag)tag.textContent=b.tag;if(num&&b.num)num.textContent=b.num;if(sub&&b.sub)sub.textContent=b.sub;if(list&&Array.isArray(b.items)&&b.items.length)list.innerHTML=b.items.map(it=>`<div class="ql-item"><div class="ql-dot"></div><span>${esc(it)}</span></div>`).join('');});
+    if(c.journey){txt('.ph-head .sec-t',c.journey.title);if(Array.isArray(c.journey.slides)&&c.journey.slides.length){const track=q('#sliderTrack');if(track){const build=()=>c.journey.slides.map(s=>`<div class="slide"><img loading="lazy" src="${encodeURI(s.img||'')}" alt="${esc(s.cap||'')}"/><div class="ph-overlay"></div><div class="ph-info"><div class="ph-num">${esc(s.tag||'')}</div><div class="ph-cap">${esc(s.cap||'')}</div></div></div>`).join('');track.innerHTML=build()+build();}}}
+    if(Array.isArray(c.conditions)&&c.conditions.length){const list=q('#dieu-kien .i3-list');if(list)list.innerHTML=c.conditions.map(t=>`<div class="i3-item"><div class="i3-ic">${CHK}</div><div>${esc(t)}</div></div>`).join('');}
+    if(Array.isArray(c.documents)&&c.documents.length){const list=q('#ho-so .i3-list');if(list)list.innerHTML=c.documents.map(t=>`<div class="i3-item"><div class="i3-ic">${CHK}</div><span>${esc(t)}</span></div>`).join('');}
+    if(c.cta){txt('.cta-t',c.cta.title);txt('.cta-d',c.cta.desc);}
+    if(c.contact){const ct=c.contact;
+      if(ct.deadline){txt('#lien-he .i3-dl',ct.deadline);txt('.cbox-d',ct.deadline);}
+      const cr=q('#lien-he .i3-cr');if(cr){const b=cr.querySelector('b');if(b&&ct.hotline)b.textContent=ct.hotline;const sp=cr.querySelector('span');if(sp&&ct.tel2)sp.textContent='· '+ct.tel2;}
+      if(ct.address){const crs=qa('#lien-he .i3-cr');const last=crs[crs.length-1];if(last){const sp=last.querySelector('span');if(sp)sp.textContent=ct.address;}const fs=q('.fl-logo .fs');if(fs)fs.textContent=ct.address;}
+    }
+  }catch(e){/* nội dung lỗi định dạng — giữ nguyên bản tĩnh */}
+})();
 </script>
 </body>
 </html>

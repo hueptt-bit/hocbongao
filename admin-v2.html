@@ -1,0 +1,534 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Admin (bản mới) — Học bổng Điều dưỡng Áo 2026</title>
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet"/>
+<style>
+:root{
+  --r:#D12026;--r2:#E04146;--rd:#B81C20;--rl:#FDE5E6;--rxl:#FFF8F8;
+  --k:#1A1A1B;--k2:#454547;--k3:#767678;--bd:#E3E3E4;--sf:#F1F1F1;--w:#fff;
+  --grad:linear-gradient(135deg,#D12026,#E04146);
+  --ok:#1F7A3D;--okb:#E3F4E9;--warn:#C77700;--warnb:#FFF1D9;--info:#1A5FAF;--infob:#E7F0FB;
+  --ff:'Be Vietnam Pro',system-ui,sans-serif;--shadow:0 10px 30px -12px rgba(26,27,28,.16);
+  --shadow-r:0 14px 34px -14px rgba(209,32,38,.45);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:var(--ff);background:radial-gradient(120% 60% at 100% 0%,var(--rl),var(--rxl) 36%,var(--sf) 78%);color:var(--k);-webkit-font-smoothing:antialiased}
+body::before{content:'';position:fixed;top:0;left:0;right:0;height:4px;background:var(--grad);z-index:1000}
+a{color:inherit;text-decoration:none}button{font-family:var(--ff);cursor:pointer}
+.shell{display:grid;grid-template-columns:236px 1fr;min-height:100vh}
+.side{background:var(--w);border-right:1px solid var(--bd);padding:18px 14px;position:sticky;top:0;height:100vh}
+.brand{display:flex;align-items:center;gap:10px;padding:8px 8px 18px}
+.brand img{height:30px}.brand b{font-size:12.5px;line-height:1.2;background:var(--grad);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.brand span{display:block;font-size:10.5px;color:var(--k3);font-weight:500}
+.nav button{display:flex;align-items:center;gap:10px;width:100%;text-align:left;padding:11px 13px;border:none;background:none;border-radius:12px;font-size:14px;font-weight:600;color:var(--k2);margin-bottom:4px}
+.nav button:hover{background:var(--sf)}
+.nav button.active{background:var(--grad);color:#fff;box-shadow:var(--shadow-r)}
+.nav button .dot{margin-left:auto;background:rgba(255,255,255,.3);color:#fff;font-size:11px;font-weight:800;border-radius:20px;padding:1px 8px}
+.nav button:not(.active) .dot{background:var(--rl);color:var(--r)}
+.main{min-width:0;display:flex;flex-direction:column}
+.topbar{display:flex;align-items:center;justify-content:space-between;gap:16px;background:rgba(255,255,255,.85);backdrop-filter:blur(20px);border-bottom:1px solid var(--bd);padding:14px 26px;position:sticky;top:0;z-index:20}
+.topbar .eb{font-size:10.5px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--r)}
+.topbar h1{font-size:19px;font-weight:800}
+.demo-pill{font-size:11px;font-weight:800;color:var(--warn);background:var(--warnb);padding:5px 11px;border-radius:20px}
+.content{padding:24px 26px;max-width:1180px;width:100%}
+.sec{display:none}.sec.active{display:block}
+/* cards */
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(165px,1fr));gap:14px;margin-bottom:20px}
+.stat{position:relative;background:var(--w);border:1px solid var(--bd);border-radius:16px;padding:16px 18px;overflow:hidden}
+.stat::before{content:'';position:absolute;left:0;top:0;bottom:0;width:4px;background:var(--grad)}
+.stat .v{font-size:26px;font-weight:900;background:var(--grad);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.stat .l{font-size:12px;color:var(--k3);margin-top:3px}
+.panel{background:var(--w);border:1px solid var(--bd);border-radius:18px;padding:20px;margin-bottom:18px;box-shadow:0 4px 18px -12px rgba(0,0,0,.12)}
+.panel h2{font-size:15px;font-weight:800;margin-bottom:14px;display:flex;align-items:center;gap:9px}
+.panel h2::before{content:'';width:18px;height:3px;background:var(--grad);border-radius:2px}
+/* chips lọc */
+.chips{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px}
+.chip{border:1.5px solid var(--bd);background:var(--w);border-radius:20px;padding:7px 14px;font-size:13px;font-weight:600;color:var(--k2)}
+.chip .c{margin-left:6px;font-weight:800;color:var(--k3)}
+.chip.on{border-color:var(--r);background:var(--rl);color:var(--r)}
+.chip.on .c{color:var(--r)}
+.toolbar{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-bottom:14px}
+input,select,textarea{font-family:var(--ff);font-size:14px;color:var(--k);padding:10px 12px;border:1.5px solid var(--bd);border-radius:10px;background:var(--w);width:100%}
+input:focus,select:focus,textarea:focus{outline:none;border-color:var(--r);box-shadow:0 0 0 3px rgba(209,32,38,.12)}
+.search{min-width:230px;flex:1;max-width:340px}
+/* table */
+.tbl-wrap{overflow:auto;background:var(--w);border:1px solid var(--bd);border-radius:16px}
+table{width:100%;border-collapse:collapse;font-size:13.5px}
+th{text-align:left;font-size:11px;font-weight:800;letter-spacing:.04em;text-transform:uppercase;color:var(--k3);padding:11px 14px;border-bottom:1px solid var(--bd)}
+td{padding:12px 14px;border-bottom:1px solid var(--sf);vertical-align:middle}
+tr.clk{cursor:pointer}tr.clk:hover td{background:var(--rxl)}
+.who2{font-weight:700}.sub{font-size:12px;color:var(--k3)}
+/* badges trạng thái */
+.bdg{display:inline-flex;align-items:center;gap:6px;font-size:11.5px;font-weight:700;padding:4px 10px;border-radius:20px;white-space:nowrap}
+.bdg .d{width:7px;height:7px;border-radius:50%;background:currentColor}
+.s-new{background:var(--infob);color:var(--info)}
+.s-contacted{background:var(--warnb);color:var(--warn)}
+.s-done,.s-ok{background:var(--okb);color:var(--ok)}
+.s-hold{background:var(--sf);color:var(--k2)}
+.s-reject{background:var(--rl);color:var(--rd)}
+/* buttons */
+.btn{display:inline-flex;align-items:center;gap:7px;font-weight:700;font-size:13px;padding:8px 14px;border-radius:10px;border:1.5px solid var(--bd);background:var(--w);color:var(--k)}
+.btn:hover{border-color:var(--r);color:var(--r)}
+.btn.pri{background:var(--grad);color:#fff;border:none;box-shadow:var(--shadow-r)}
+.btn.pri:hover{color:#fff;transform:translateY(-1px)}
+.btn.tiny{padding:6px 10px;font-size:12px}
+.docpill{font-size:11.5px;font-weight:700;padding:3px 9px;border-radius:20px}
+.doc-ok{background:var(--okb);color:var(--ok)}.doc-mid{background:var(--warnb);color:var(--warn)}.doc-low{background:var(--rl);color:var(--rd)}
+/* drawer */
+.drawer-bg{position:fixed;inset:0;background:rgba(26,26,27,.45);z-index:90;display:none}
+.drawer-bg.show{display:block}
+.drawer{position:fixed;top:0;right:0;height:100vh;width:480px;max-width:94vw;background:var(--w);box-shadow:-20px 0 50px -20px rgba(0,0,0,.4);z-index:95;transform:translateX(100%);transition:.28s;overflow:auto}
+.drawer.show{transform:none}
+.drawer-head{position:sticky;top:0;background:var(--grad);color:#fff;padding:20px 22px;display:flex;justify-content:space-between;align-items:flex-start}
+.drawer-head h3{font-size:18px}.drawer-head .x{background:rgba(255,255,255,.2);border:none;color:#fff;width:32px;height:32px;border-radius:50%;font-size:18px}
+.drawer-body{padding:20px 22px}
+.kv{display:flex;gap:12px;padding:9px 0;border-bottom:1px solid var(--sf);font-size:13.5px}
+.kv b{flex:0 0 130px;color:var(--k3);font-weight:600}
+.doc-row{display:flex;align-items:center;gap:11px;padding:11px 0;border-bottom:1px solid var(--sf)}
+.doc-ic{width:26px;height:26px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;color:#fff}
+.doc-ic.has{background:var(--grad)}.doc-ic.no{background:var(--sf);border:1.5px dashed var(--bd);color:var(--k3)}
+.note{background:var(--sf);border-radius:10px;padding:10px 12px;font-size:13px;margin-bottom:8px}
+.note .m{font-size:11px;color:var(--k3);margin-top:4px}
+/* CMS */
+.cms-tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px}
+.cms-tabs button{border:1.5px solid var(--bd);background:var(--w);border-radius:10px;padding:8px 14px;font-size:13px;font-weight:700;color:var(--k2)}
+.cms-tabs button.on{background:var(--rl);border-color:var(--r);color:var(--r)}
+.fld{margin-bottom:14px}.fld label{display:block;font-size:12.5px;font-weight:700;color:var(--k2);margin-bottom:6px}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.list-row{display:flex;gap:8px;align-items:flex-start;margin-bottom:8px}
+.list-row .btn{flex-shrink:0}
+.imgcard{background:var(--w);border:1px solid var(--bd);border-radius:14px;overflow:hidden}
+.imgcard img{width:100%;height:130px;object-fit:cover;display:block;background:var(--sf)}
+.imgcard .ph{padding:11px 13px}
+.imgcard .ph .t{font-size:12.5px;font-weight:700}.imgcard .ph .s{font-size:11px;color:var(--k3);margin:2px 0 8px}
+.imggrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:14px}
+.savebar{position:sticky;bottom:0;background:rgba(255,255,255,.92);backdrop-filter:blur(10px);border-top:1px solid var(--bd);margin:18px -26px -24px;padding:14px 26px;display:flex;gap:10px;justify-content:flex-end;align-items:center}
+.muted{color:var(--k3)}.right{margin-left:auto}
+.toast{position:fixed;bottom:22px;left:50%;transform:translateX(-50%) translateY(12px);background:var(--k);color:#fff;padding:11px 18px;border-radius:12px;font-size:13.5px;opacity:0;transition:.25s;z-index:1200}
+.toast.show{opacity:1;transform:translateX(-50%)}
+@media(max-width:840px){.shell{grid-template-columns:1fr}.side{display:none}.grid2{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="shell">
+  <aside class="side">
+    <div class="brand"><img src="logo.png" alt="PNE" onerror="this.style.display='none'"/>
+      <div><b>Học bổng Điều dưỡng Áo</b><span>Quản trị tuyển sinh 2026</span></div></div>
+    <nav class="nav" id="nav"></nav>
+  </aside>
+  <main class="main">
+    <div class="topbar">
+      <div><div class="eb">Phuong Nam Education · Bang Tirol</div><h1 id="ptitle">Tổng quan</h1></div>
+      <div style="display:flex;align-items:center;gap:12px">
+        <label style="font-size:12px;color:var(--k3);display:flex;align-items:center;gap:6px;font-weight:600">Đang xem:
+          <select id="roleView" style="width:auto;padding:7px 10px" onchange="setRole(this.value)">
+            <option value="admin">Admin</option><option value="editor">Biên tập</option><option value="consultant">Tư vấn</option><option value="viewer">Chỉ xem</option>
+          </select></label>
+        <span class="demo-pill">● Xem thử</span>
+      </div>
+    </div>
+    <div class="content">
+      <section class="sec active" id="sec-dash"></section>
+      <section class="sec" id="sec-consult"></section>
+      <section class="sec" id="sec-apply"></section>
+      <section class="sec" id="sec-cms"></section>
+      <section class="sec" id="sec-roles"></section>
+    </div>
+  </main>
+</div>
+<div class="drawer-bg" id="drawerBg" onclick="closeDrawer()"></div>
+<div class="drawer" id="drawer"><div id="drawerInner"></div></div>
+<div class="toast" id="toast"></div>
+
+<!-- Màn hình đăng nhập (chỉ hiện khi đã nối Supabase) -->
+<div id="loginBg" style="position:fixed;inset:0;z-index:2000;display:none;align-items:center;justify-content:center;background:radial-gradient(120% 80% at 100% 0%,var(--rl),var(--rxl) 40%,var(--sf))">
+  <form id="loginCard" onsubmit="doLogin(event)" style="background:#fff;border:1px solid var(--bd);border-radius:18px;padding:30px 28px;width:360px;max-width:92vw;box-shadow:var(--shadow)">
+    <img src="logo.png" style="height:30px;margin-bottom:12px" onerror="this.style.display='none'"/>
+    <h2 style="font-size:18px;font-weight:800;margin-bottom:2px">Đăng nhập quản trị</h2>
+    <p style="font-size:12.5px;color:var(--k3);margin-bottom:18px">Học bổng Điều dưỡng Áo 2026</p>
+    <div class="fld"><label>Email</label><input id="li_email" type="email" placeholder="ban@phuongnameducation.com" autocomplete="username"/></div>
+    <div class="fld"><label>Mật khẩu</label><input id="li_pw" type="password" autocomplete="current-password"/></div>
+    <div id="li_err" style="display:none;color:var(--rd);font-size:12.5px;margin-bottom:10px"></div>
+    <button class="btn pri" type="submit" id="li_btn" style="width:100%;justify-content:center">Đăng nhập</button>
+  </form>
+</div>
+
+<script src="supabase-config.js"></script>
+<script src="admin-data.js"></script>
+<script>
+const esc=s=>String(s==null?'':s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const toast=m=>{const t=document.getElementById('toast');t.textContent=m;t.classList.add('show');clearTimeout(t._);t._=setTimeout(()=>t.classList.remove('show'),2200);};
+
+/* ===== Dữ liệu mẫu ===== */
+const CONSULT_ST={'Mới':'s-new','Đã liên hệ':'s-contacted','Hẹn tư vấn':'s-hold','Hoàn tất':'s-done'};
+const APPLY_ST={'Chờ kiểm tra hồ sơ':'s-new','Cần bổ sung':'s-hold','Đủ điều kiện':'s-ok','Phỏng vấn':'s-contacted','Đậu học bổng':'s-done','Không đạt':'s-reject'};
+const DOCS=['Sơ yếu lý lịch','CCCD/Hộ chiếu','Học bạ/Sổ liên lạc','Bằng/Giấy CN tốt nghiệp','Chứng chỉ/Thành tích'];
+const owners=['Minh','Lan','Hương','Chưa phân công'];
+const provinces=['TP. HCM','Đồng Nai','Bình Dương','Long An','Cần Thơ'];
+let consult=[], apply=[];
+(function seed(){
+  const names=['Nguyễn Thị Mai','Trần Văn Hùng','Lê Thị Hoa','Phạm Minh Tuấn','Võ Thị Lan','Đặng Quốc Anh','Bùi Thị Hương','Hoàng Văn Nam','Ngô Thị Thu','Đỗ Minh Khoa'];
+  const cst=Object.keys(CONSULT_ST), ast=Object.keys(APPLY_ST);
+  names.forEach((n,i)=>{
+    consult.push({id:'c'+i,name:n,phone:'09'+String(12345670+i*111111).slice(0,8),email:i%2?'':n.split(' ').pop().toLowerCase()+i+'@gmail.com',
+      need:['Tư vấn lộ trình','Hỏi học phí','Điều kiện tiếng Đức','Thủ tục visa'][i%4],status:cst[i%cst.length],owner:owners[i%owners.length],
+      last:i%3?('0'+(1+i%9)+'/06/2026'):'', notes:i%3?[{m:'Đã gọi, hẹn gọi lại cuối tuần.',by:'Minh',at:'02/06'}]:[]});
+  });
+  names.slice(0,8).forEach((n,i)=>{
+    const have=(i*2)%5+ (i%2?1:0); const docs=DOCS.map((d,j)=>({name:d,uploaded:j< (i%5+1)}));
+    apply.push({id:'a'+i,name:n,phone:'09'+String(98765430+i*131313).slice(0,8),email:n.split(' ').pop().toLowerCase()+i+'@gmail.com',
+      province:provinces[i%provinces.length],level:['Chưa có','A1','A2','B1'][i%4],status:ast[i%ast.length],owner:owners[i%owners.length],
+      due:'1'+(i%9)+'/07/2026',docs, notes:[{m:'Nhận hồ sơ, đang kiểm tra.',by:'Lan',at:'03/06'}]});
+  });
+})();
+
+/* ===== Người dùng (phân quyền) ===== */
+let users=[
+  {id:'u1',name:'Phạm Quản Trị',email:'admin@phuongnameducation.com',role:'admin',status:'Hoạt động'},
+  {id:'u2',name:'Nguyễn Biên Tập',email:'bientap@phuongnameducation.com',role:'editor',status:'Hoạt động'},
+  {id:'u3',name:'Trần Tư Vấn',email:'tuvan1@phuongnameducation.com',role:'consultant',status:'Hoạt động'},
+  {id:'u4',name:'Lê Hỗ Trợ',email:'tuvan2@phuongnameducation.com',role:'consultant',status:'Tạm khóa'},
+];
+
+/* ===== Nội dung landing (CMS) ===== */
+const content={
+  hero:{badge:'Thông báo xét tuyển',title:'Học bổng ngành',highlight:'Điều dưỡng tại Áo',
+    desc:'Học bổng được tài trợ bởi các đơn vị thuộc hệ thống y tế của Nhà nước tại bang Tirol, Áo và Phuong Nam Education phối hợp triển khai tại Việt Nam.',
+    location:'Bang Tirol, Cộng hòa Áo',cta:'Ứng tuyển ngay',chip:'Đang nhận hồ sơ'},
+  stats:[{v:'100%',l:'Chi phí đào tạo tại Việt Nam'},{v:'2.800€',l:'Lương / tháng tại Áo'},{v:'14',l:'Tháng lương / năm'},{v:'5 năm',l:'Lộ trình định cư'}],
+  benefit1:{tag:'Giai đoạn 1 · Tại Việt Nam (15–18 tháng)',num:'100%',sub:'Tài trợ 100% chi phí tham gia chương trình tại Việt Nam',
+    items:['Khóa tiếng Đức từ A1 đến B2','Khóa luyện thi & lệ phí thi ÖSD B2 (01 lần)','Khóa tiếng Đức chuyên ngành Điều dưỡng cơ bản','Khóa đào tạo Điều dưỡng ngắn hạn','Hồ sơ, lệ phí visa, vé máy bay một chiều & bảo hiểm ban đầu']},
+  benefit2:{tag:'Giai đoạn 2 · Tại Cộng hòa Áo',num:'2.800€',sub:'Khởi đầu sự nghiệp điều dưỡng tại Áo — nhận lương ổn định ngay từ tháng đầu',
+    items:['Nhận bằng tốt nghiệp quốc tế, cơ hội học lên cao','Hợp đồng dài hạn tại hệ thống y tế nhà nước Áo','Cam kết nhận tối thiểu 14 tháng lương/năm','Nghỉ hưởng lương 5–6 tuần phép/năm','Hỗ trợ sắp xếp nhà ở; cơ hội định cư dài hạn sau 5 năm']},
+  conditions:['Học sinh chuẩn bị hoặc đã tốt nghiệp THPT có hạnh kiểm Tốt.','ĐTB Tiếng Anh THPT ≥ 7.0 hoặc IELTS 5.0 (hoặc tương đương).','Có định hướng nghề Điều dưỡng và mong muốn làm việc, định cư lâu dài tại Áo.'],
+  documents:DOCS.slice(),
+  cta:{title:'Đặt nền móng cho sự nghiệp của bạn tại Cộng hòa Áo.',desc:'Học bổng toàn phần — không phí đào tạo, không phí dự tuyển. Từ tiếng Đức A1 đến 2.800€/tháng tại Tirol.'},
+  contact:{hotline:'1900 7060',tel2:'(028) 3622 8849',address:'357 Lê Hồng Phong, P. Vườn Lài, TP. HCM',deadline:'30/08/2026'}
+};
+// Ảnh đi kèm ngay trong khối nội dung tương ứng
+content.hero.image='hero.jpg';
+content.dest={image:'innsbruck.jpg',tag:'Điểm đến · Bang Tirol',city:'Innsbruck, Cộng hòa Áo',desc:'Trung tâm văn hóa & y tế hàng đầu Châu Âu — nơi bạn bắt đầu sự nghiệp'};
+content.journey={title:'Mở ra sự nghiệp và cuộc sống mới tại Áo.',slides:[
+  {img:'s1.jpg',tag:'Tại Việt Nam',cap:'Đào tạo tiếng Đức & chuẩn bị hồ sơ'},
+  {img:'s2.jpg',tag:'Đồng nghiệp',cap:'Điều dưỡng viên tại Cộng hòa Áo'},
+  {img:'s4.jpg',tag:'Nơi làm việc',cap:'Cơ sở y tế tại bang Tirol'},
+  {img:'s5.jpg',tag:'Môi trường',cap:'Cơ sở chăm sóc hiện đại'},
+  {img:'s6.jpg',tag:'Trang thiết bị',cap:'Bệnh viện chuẩn Châu Âu'},
+  {img:'s7.jpg',tag:'Sự nghiệp',cap:'Khởi đầu nghề điều dưỡng tại Áo'},
+]};
+
+/* ===== Điều hướng ===== */
+const SECTIONS=[['dash','Tổng quan'],['consult','Đăng ký tư vấn'],['apply','Quản lý ứng tuyển'],['cms','Nội dung landing'],['roles','Phân quyền']];
+const ROLE_LABEL={admin:'Admin',editor:'Biên tập',consultant:'Tư vấn',viewer:'Chỉ xem'};
+const PERMS={
+  admin:     {secs:['dash','consult','apply','cms','roles'],edit:true, del:true,  cms:true, users:true},
+  editor:    {secs:['dash','consult','apply','cms'],        edit:true, del:false, cms:true, users:false},
+  consultant:{secs:['dash','consult','apply'],              edit:true, del:false, cms:false,users:false},
+  viewer:    {secs:['dash','consult','apply'],              edit:false,del:false, cms:false,users:false},
+};
+let currentRole='admin', currentSection='dash';
+function can(k){return !!PERMS[currentRole][k];}
+function setRole(r){
+  currentRole=r;
+  if(!PERMS[r].secs.includes(currentSection))currentSection='dash';
+  renderNav();go(currentSection);renderConsult();renderApply();
+  if(can('cms'))renderCMS(); if(can('users'))renderRoles();
+  toast('Đang xem với vai trò: '+ROLE_LABEL[r]);
+}
+function renderNav(){
+  document.getElementById('nav').innerHTML=SECTIONS.filter(([k])=>PERMS[currentRole].secs.includes(k)).map(([k,l])=>{
+    let dot='';
+    if(k==='consult')dot=`<span class="dot">${consult.filter(x=>x.status==='Mới').length}</span>`;
+    if(k==='apply')dot=`<span class="dot">${apply.length}</span>`;
+    return `<button data-k="${k}" class="${k===currentSection?'active':''}" onclick="go('${k}')">${l}${dot}</button>`;
+  }).join('');
+}
+function go(k){
+  if(!PERMS[currentRole].secs.includes(k))return;
+  currentSection=k;
+  document.querySelectorAll('.nav button').forEach(b=>b.classList.toggle('active',b.dataset.k===k));
+  document.querySelectorAll('.sec').forEach(s=>s.classList.toggle('active',s.id==='sec-'+k));
+  document.getElementById('ptitle').textContent=SECTIONS.find(s=>s[0]===k)[1];
+}
+
+/* ===== Drawer ===== */
+function openDrawer(html){document.getElementById('drawerInner').innerHTML=html;document.getElementById('drawer').classList.add('show');document.getElementById('drawerBg').classList.add('show');}
+function closeDrawer(){document.getElementById('drawer').classList.remove('show');document.getElementById('drawerBg').classList.remove('show');}
+
+/* ===== Tổng quan ===== */
+function renderDash(){
+  const newC=consult.filter(x=>x.status==='Mới').length;
+  const contacted=consult.filter(x=>x.status!=='Mới').length;
+  const needDoc=apply.filter(x=>x.docs.filter(d=>d.uploaded).length<5).length;
+  const due=Math.max(0,Math.ceil((new Date('2026-08-30')-new Date())/86400000));
+  const card=(v,l)=>`<div class="stat"><div class="v">${v}</div><div class="l">${l}</div></div>`;
+  document.getElementById('sec-dash').innerHTML=`
+    <div class="panel" style="background:var(--grad);color:#fff;border:none;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px">
+      <div><div style="font-size:11px;letter-spacing:.14em;text-transform:uppercase;opacity:.85">Hạn nộp hồ sơ</div>
+      <div style="font-size:30px;font-weight:900;margin-top:4px">30/08/2026</div></div>
+      <div style="text-align:center;background:rgba(255,255,255,.16);border:1.5px solid rgba(255,255,255,.3);border-radius:14px;padding:14px 24px">
+        <div style="font-size:34px;font-weight:900">${due}</div><div style="font-size:11px;text-transform:uppercase;opacity:.85">ngày còn lại</div></div>
+    </div>
+    <div class="cards">${card(consult.length,'Đăng ký tư vấn')}${card(newC,'Tư vấn chưa liên hệ')}${card(apply.length,'Hồ sơ ứng tuyển')}${card(needDoc,'Hồ sơ còn thiếu giấy tờ')}</div>
+    <div class="panel"><h2>Tư vấn cần gọi (chưa liên hệ)</h2>${
+      newC? `<div class="tbl-wrap"><table><thead><tr><th>Ứng viên</th><th>Nhu cầu</th><th>Trạng thái</th></tr></thead><tbody>${
+        consult.filter(x=>x.status==='Mới').map(c=>`<tr class="clk" onclick="openConsult('${c.id}')"><td><span class="who2">${esc(c.name)}</span><div class="sub">${esc(c.phone)}</div></td><td>${esc(c.need)}</td><td><span class="bdg ${CONSULT_ST[c.status]}"><span class="d"></span>${c.status}</span></td></tr>`).join('')
+      }</tbody></table></div>` : '<p class="muted">Tất cả đăng ký đã được liên hệ 👍</p>'}</div>`;
+}
+
+/* ===== Đăng ký tư vấn ===== */
+let consultFilter='all';
+function renderConsult(){
+  const counts={all:consult.length}; Object.keys(CONSULT_ST).forEach(s=>counts[s]=consult.filter(c=>c.status===s).length);
+  const chips=[['all','Tất cả'],...Object.keys(CONSULT_ST).map(s=>[s,s])].map(([k,l])=>
+    `<button class="chip ${consultFilter===k?'on':''}" onclick="consultFilter='${k}';renderConsult()">${l}<span class="c">${counts[k]||0}</span></button>`).join('');
+  const rows=consult.filter(c=>consultFilter==='all'||c.status===consultFilter).map(c=>{
+    const contacted=c.status!=='Mới';
+    return `<tr class="clk" onclick="openConsult('${c.id}')">
+      <td><span class="who2">${esc(c.name)}</span><div class="sub">${esc(c.phone)}${c.email?' · '+esc(c.email):''}</div></td>
+      <td>${esc(c.need)}</td>
+      <td><span class="bdg ${CONSULT_ST[c.status]}"><span class="d"></span>${c.status}</span></td>
+      <td class="sub">${c.last||'—'}</td>
+      <td>${esc(c.owner)}</td>
+      <td onclick="event.stopPropagation()">${contacted?'<span class="docpill doc-ok">✓ Đã liên hệ</span>':(can('edit')?`<button class="btn tiny pri" onclick="markContacted('${c.id}')">Đánh dấu đã liên hệ</button>`:'<span class="bdg s-new"><span class="d"></span>Mới</span>')}</td>
+    </tr>`;
+  }).join('');
+  document.getElementById('sec-consult').innerHTML=`
+    <p class="muted" style="margin-bottom:6px">Danh sách người để lại thông tin cần tư vấn. Luồng: Mới → Đã liên hệ → Hẹn tư vấn → Hoàn tất.</p>
+    <div class="chips">${chips}</div>
+    <div class="tbl-wrap"><table><thead><tr><th>Người đăng ký</th><th>Nhu cầu</th><th>Trạng thái</th><th>Liên hệ gần nhất</th><th>Phụ trách</th><th></th></tr></thead><tbody>${rows||'<tr><td colspan="6" class="muted" style="text-align:center;padding:30px">Không có mục nào.</td></tr>'}</tbody></table></div>`;
+  renderNav();
+}
+function markContacted(id){const c=consult.find(x=>x.id===id);c.status='Đã liên hệ';c.last=new Date().toLocaleDateString('vi-VN');persist('consult',c);toast('Đã đánh dấu "Đã liên hệ"');renderConsult();renderDash();}
+let consultDraft=null;
+function openConsult(id){consultDraft=JSON.parse(JSON.stringify(consult.find(x=>x.id===id)));renderConsultDrawer();}
+function renderConsultDrawer(){
+  const d=consultDraft, real=consult.find(x=>x.id===d.id);
+  const dirty=d.status!==real.status||d.owner!==real.owner;
+  const opts=Object.keys(CONSULT_ST).map(s=>`<option ${d.status===s?'selected':''}>${s}</option>`).join('');
+  openDrawer(`<div class="drawer-head"><div><h3>${esc(d.name)}</h3><div style="opacity:.85;font-size:13px;margin-top:3px">${esc(d.phone)}</div></div><button class="x" onclick="closeDrawer()">×</button></div>
+  <div class="drawer-body">
+    <div class="kv"><b>Email</b><span>${esc(d.email)||'—'}</span></div>
+    <div class="kv"><b>Nhu cầu</b><span>${esc(d.need)}</span></div>
+    <div class="fld" style="margin-top:14px"><label>Người phụ trách</label><select ${can('edit')?'':'disabled'} onchange="consultDraft.owner=this.value;renderConsultDrawer()">${ownerOptions(d.owner)}</select></div>
+    <div class="fld"><label>Trạng thái liên hệ</label><select ${can('edit')?'':'disabled'} onchange="consultDraft.status=this.value;renderConsultDrawer()">${opts}</select></div>
+    ${can('edit')?`<div style="display:flex;align-items:center;gap:10px;margin-bottom:16px">
+      ${dirty?'<span class="docpill doc-mid">● Có thay đổi chưa lưu</span>':'<span class="sub">Chưa có thay đổi</span>'}
+      <button class="btn pri" style="margin-left:auto" ${dirty?'':'disabled'} onclick="saveConsult()">Lưu thay đổi</button>
+    </div>
+    <div class="fld"><label>Thêm ghi chú liên hệ</label><textarea id="cnote" rows="2" placeholder="VD: Đã gọi, hẹn tư vấn 2pm thứ 5..."></textarea></div>
+    <button class="btn" onclick="addConsultNote()">Lưu ghi chú</button>`:`<div class="sub" style="margin-bottom:12px">Chế độ chỉ xem — bạn không có quyền chỉnh sửa.</div>`}
+    <h2 style="font-size:14px;margin:18px 0 10px">Lịch sử liên hệ</h2>
+    <div>${(real.notes||[]).map(n=>`<div class="note">${esc(n.m)}<div class="m">${esc(n.by)} · ${esc(n.at)}</div></div>`).join('')||'<p class="muted">Chưa có ghi chú.</p>'}</div>
+  </div>`);
+}
+function saveConsult(){const real=consult.find(x=>x.id===consultDraft.id);real.status=consultDraft.status;real.owner=consultDraft.owner;if(real.status!=='Mới'&&!real.last)real.last=new Date().toLocaleDateString('vi-VN');persist('consult',real);toast('Đã lưu thay đổi');renderConsult();renderDash();renderConsultDrawer();}
+function addConsultNote(){const real=consult.find(x=>x.id===consultDraft.id);const v=document.getElementById('cnote').value.trim();if(!v)return;real.notes.unshift({m:v,by:(PNE.session&&PNE.session()&&PNE.session().name)||'Bạn',at:new Date().toLocaleDateString('vi-VN')});persist('consult',real);toast('Đã lưu ghi chú');renderConsultDrawer();}
+
+/* ===== Quản lý ứng tuyển ===== */
+let applyFilter='all';
+function docBadge(a){const n=a.docs.filter(d=>d.uploaded).length;const cls=n===5?'doc-ok':n>=3?'doc-mid':'doc-low';return `<span class="docpill ${cls}">${n}/5 hồ sơ</span>`;}
+function renderApply(){
+  const counts={all:apply.length};Object.keys(APPLY_ST).forEach(s=>counts[s]=apply.filter(a=>a.status===s).length);
+  const chips=[['all','Tất cả'],...Object.keys(APPLY_ST).map(s=>[s,s])].map(([k,l])=>
+    `<button class="chip ${applyFilter===k?'on':''}" onclick="applyFilter='${k}';renderApply()">${l}<span class="c">${counts[k]||0}</span></button>`).join('');
+  const rows=apply.filter(a=>applyFilter==='all'||a.status===applyFilter).map(a=>`
+    <tr class="clk" onclick="openApply('${a.id}')">
+      <td><span class="who2">${esc(a.name)}</span><div class="sub">${esc(a.province)} · Đức: ${esc(a.level)}</div></td>
+      <td class="sub">${esc(a.phone)}</td>
+      <td>${docBadge(a)}</td>
+      <td><span class="bdg ${APPLY_ST[a.status]}"><span class="d"></span>${a.status}</span></td>
+      <td>${esc(a.owner)}</td>
+      <td class="sub">${esc(a.due)}</td>
+    </tr>`).join('');
+  document.getElementById('sec-apply').innerHTML=`
+    <p class="muted" style="margin-bottom:6px">Ứng viên đã nộp hồ sơ. Lọc theo trạng thái, bấm vào dòng để xem & quản lý hồ sơ từng người.</p>
+    <div class="chips">${chips}</div>
+    <div class="tbl-wrap"><table><thead><tr><th>Ứng viên</th><th>SĐT</th><th>Hồ sơ</th><th>Trạng thái</th><th>Phụ trách</th><th>Hạn</th></tr></thead><tbody>${rows||'<tr><td colspan="6" class="muted" style="text-align:center;padding:30px">Không có hồ sơ.</td></tr>'}</tbody></table></div>`;
+}
+function ownerOptions(cur){
+  const list=['Chưa phân công',...users.filter(u=>u.status==='Hoạt động').map(u=>u.name)];
+  if(cur&&!list.includes(cur))list.push(cur);
+  return list.map(o=>`<option ${o===cur?'selected':''}>${esc(o)}</option>`).join('');
+}
+let applyDraft=null;
+function openApply(id){applyDraft=JSON.parse(JSON.stringify(apply.find(x=>x.id===id)));renderApplyDrawer();}
+function renderApplyDrawer(){
+  const a=applyDraft, real=apply.find(x=>x.id===a.id);
+  const dirty=JSON.stringify(a)!==JSON.stringify(real);
+  const opts=Object.keys(APPLY_ST).map(s=>`<option ${a.status===s?'selected':''}>${s}</option>`).join('');
+  const n=a.docs.filter(d=>d.uploaded).length;
+  const docs=a.docs.map((d,i)=>`<div class="doc-row"><span class="doc-ic ${d.uploaded?'has':'no'}">${d.uploaded?'✓':'!'}</span>
+    <div style="flex:1"><div style="font-weight:600;font-size:13.5px">${esc(d.name)}</div><div class="sub">${d.uploaded?'Đã nộp':'Chưa nộp'}</div></div>
+    <div style="display:flex;gap:6px">${d.uploaded?`<button class="btn tiny" onclick="viewDoc('${esc(d.path||'')}')">Xem</button>`:''}${can('edit')?`<button class="btn tiny" onclick="toggleDocDraft(${i})">${d.uploaded?'Bỏ đánh dấu':'Đánh dấu đã nộp'}</button>`:''}</div></div>`).join('');
+  openDrawer(`<div class="drawer-head"><div><h3>${esc(a.name)}</h3><div style="opacity:.85;font-size:13px;margin-top:3px">${esc(a.phone)} · ${esc(a.email)}</div></div><button class="x" onclick="closeDrawer()">×</button></div>
+  <div class="drawer-body">
+    <div class="kv"><b>Tỉnh / Thành</b><span>${esc(a.province)}</span></div>
+    <div class="kv"><b>Trình độ Đức</b><span>${esc(a.level)}</span></div>
+    <div class="fld" style="margin-top:14px"><label>Người phụ trách</label><select ${can('edit')?'':'disabled'} onchange="applyDraft.owner=this.value;renderApplyDrawer()">${ownerOptions(a.owner)}</select></div>
+    <div class="fld"><label>Trạng thái hồ sơ</label><select ${can('edit')?'':'disabled'} onchange="applyDraft.status=this.value;renderApplyDrawer()">${opts}</select></div>
+    <h2 style="font-size:14px;margin:16px 0 4px">Hồ sơ đính kèm <span class="docpill ${n===5?'doc-ok':n>=3?'doc-mid':'doc-low'}" style="margin-left:6px">${n}/5</span></h2>
+    <div>${docs}</div>
+    ${can('edit')?`<div style="position:sticky;bottom:0;background:#fff;border-top:1px solid var(--sf);margin-top:16px;padding:12px 0;display:flex;align-items:center;gap:10px">
+      ${dirty?'<span class="docpill doc-mid">● Có thay đổi chưa lưu</span>':'<span class="sub">Chưa có thay đổi</span>'}
+      <button class="btn pri" style="margin-left:auto" ${dirty?'':'disabled'} onclick="saveApply()">Lưu thay đổi</button>
+    </div>`:`<div class="sub" style="margin-top:16px;border-top:1px solid var(--sf);padding-top:12px">Chế độ chỉ xem — bạn không có quyền chỉnh sửa.</div>`}
+  </div>`);
+}
+function toggleDocDraft(i){applyDraft.docs[i].uploaded=!applyDraft.docs[i].uploaded;renderApplyDrawer();}
+function saveApply(){const real=apply.find(x=>x.id===applyDraft.id);Object.assign(real,JSON.parse(JSON.stringify(applyDraft)));persist('apply',real);toast('Đã lưu thay đổi');renderApply();renderApplyDrawer();}
+async function viewDoc(path){if(!BACKEND||!path){toast('Xem thử — tài liệu thật mở được khi có hồ sơ thật');return;}try{const u=await PNE.signedUrl(path);window.open(u,'_blank');}catch(ex){toast('Không mở được tài liệu: '+(ex.message||ex));}}
+
+/* ===== CMS nội dung landing ===== */
+let cmsTab='hero';
+const CMS_TABS=[['hero','Hero'],['dest','Điểm đến'],['benefit1','Quyền lợi GĐ1'],['benefit2','Quyền lợi GĐ2'],['journey','Hành trình'],['conditions','Điều kiện'],['documents','Hồ sơ'],['cta','CTA'],['contact','Liên hệ']];
+function renderCMS(){
+  const tabs=CMS_TABS.map(([k,l])=>`<button class="${cmsTab===k?'on':''}" onclick="cmsTab='${k}';renderCMS()">${l}</button>`).join('');
+  document.getElementById('sec-cms').innerHTML=`
+    <p class="muted" style="margin-bottom:6px">Sửa toàn bộ nội dung & hình ảnh trên landing — không cần đụng code. Lưu nháp để xem lại, Xuất bản để áp lên trang.</p>
+    <div class="cms-tabs">${tabs}</div>
+    <div class="panel" id="cmsBody"></div>
+    <div class="savebar"><a class="btn" href="index.html" target="_blank">Xem landing</a><span class="right"></span>
+      <button class="btn" id="cmsDraftBtn" onclick="cmsSaveDraft(this)">Lưu nháp</button>
+      <button class="btn pri" id="cmsPubBtn" onclick="cmsPublish(this)">Xuất bản</button></div>`;
+  document.getElementById('cmsBody').innerHTML=cmsBody();
+}
+async function cmsSaveDraft(btn){if(!BACKEND){toast('Đã lưu nháp (xem thử)');return;}btn.disabled=true;try{await PNE.cmsSaveDraft(content);toast('Đã lưu bản nháp');}catch(ex){toast('Lưu nháp lỗi: '+(ex.message||ex));}finally{btn.disabled=false;}}
+async function cmsPublish(btn){if(!BACKEND){toast('Đã xuất bản (xem thử) — sẽ áp lên landing khi nối Supabase');return;}if(!confirm('Xuất bản nội dung này lên landing page?'))return;btn.disabled=true;try{await PNE.cmsPublish(content);toast('Đã xuất bản lên landing');}catch(ex){toast('Xuất bản lỗi: '+(ex.message||ex));}finally{btn.disabled=false;}}
+function inp(val,oninput){return `<input value="${esc(val)}" oninput="${oninput}"/>`;}
+function fld(label,val,path){return `<div class="fld"><label>${label}</label><input value="${esc(val)}" oninput="setPath('${path}',this.value)"/></div>`;}
+function area(label,val,path){return `<div class="fld"><label>${label}</label><textarea rows="3" oninput="setPath('${path}',this.value)">${esc(val)}</textarea></div>`;}
+function setPath(path,v){const seg=path.split('.');let o=content;for(let i=0;i<seg.length-1;i++)o=o[seg[i]];o[seg[seg.length-1]]=v;}
+function getArr(p){if(p==='conditions')return content.conditions;if(p==='documents')return content.documents;return content[p].items;}
+function listEditor(arrPath){
+  const arr=getArr(arrPath);
+  return arr.map((it,i)=>`<div class="list-row"><input value="${esc(it)}" oninput="listSet('${arrPath}',${i},this.value)"/><button class="btn tiny" onclick="listDel('${arrPath}',${i})">Xóa</button></div>`).join('')
+    +`<button class="btn tiny" style="margin-top:4px" onclick="listAdd('${arrPath}')">+ Thêm dòng</button>`;
+}
+function listSet(p,i,v){getArr(p)[i]=v;}            /* gõ: không render lại → không mất focus */
+function listDel(p,i){getArr(p).splice(i,1);renderCMS();}
+function listAdd(p){getArr(p).push('');renderCMS();}
+function cmsBody(){
+  const c=content;
+  if(cmsTab==='hero')return imgPicker('Ảnh Hero',c.hero.image,'hero.image',HERO_IMG)
+    +fld('Nhãn thông báo',c.hero.badge,'hero.badge')
+    +`<div class="grid2">`+fld('Tiêu đề (dòng 1)',c.hero.title,'hero.title')+fld('Dòng nhấn mạnh (đỏ)',c.hero.highlight,'hero.highlight')+`</div>`
+    +area('Mô tả',c.hero.desc,'hero.desc')
+    +`<div class="grid2">`+fld('Điểm đến',c.hero.location,'hero.location')+fld('Nhãn nút (CTA)',c.hero.cta,'hero.cta')+`</div>`
+    +fld('Chip trạng thái (góc ảnh)',c.hero.chip,'hero.chip')
+    +`<label style="font-size:12.5px;font-weight:700;color:var(--k2);display:block;margin-top:8px">4 ô thống kê</label>`
+    +c.stats.map((s,i)=>`<div class="grid2">${fld('Số liệu '+(i+1),s.v,'stats.'+i+'.v')}${fld('Nhãn '+(i+1),s.l,'stats.'+i+'.l')}</div>`).join('');
+  if(cmsTab==='dest')return imgPicker('Ảnh điểm đến (Innsbruck)',c.dest.image,'dest.image',DEST_IMG)
+    +fld('Nhãn nhỏ',c.dest.tag,'dest.tag')+fld('Tên thành phố',c.dest.city,'dest.city')+area('Mô tả',c.dest.desc,'dest.desc');
+  if(cmsTab==='journey')return fld('Tiêu đề khối "Cuộc sống & sự nghiệp"',c.journey.title,'journey.title')
+    +c.journey.slides.map((s,i)=>`<div class="panel" style="box-shadow:none;border-radius:14px;padding:14px;margin-bottom:12px"><div style="display:flex;gap:14px;flex-wrap:wrap;align-items:flex-start">${imgPicker('Ảnh slide '+(i+1),s.img,'journey.slides.'+i+'.img',SLIDE_IMG)}<div style="flex:1;min-width:200px">${fld('Nhãn',s.tag,'journey.slides.'+i+'.tag')}${fld('Mô tả',s.cap,'journey.slides.'+i+'.cap')}<button class="btn tiny" onclick="slideDel(${i})">Xóa slide</button></div></div></div>`).join('')
+    +`<button class="btn tiny" onclick="slideAdd()">+ Thêm slide</button>`;
+  if(cmsTab==='benefit1'||cmsTab==='benefit2'){const b=c[cmsTab];return fld('Tiêu đề nhỏ (tag)',b.tag,cmsTab+'.tag')+`<div class="grid2">`+fld('Số nổi bật',b.num,cmsTab+'.num')+fld('Mô tả',b.sub,cmsTab+'.sub')+`</div>`+`<label style="font-size:12.5px;font-weight:700;color:var(--k2)">Danh sách quyền lợi</label>`+listEditor(cmsTab);}
+  if(cmsTab==='conditions')return `<label style="font-size:12.5px;font-weight:700;color:var(--k2)">Các điều kiện xét tuyển</label>`+listEditor('conditions');
+  if(cmsTab==='documents')return `<label style="font-size:12.5px;font-weight:700;color:var(--k2)">Danh mục hồ sơ dự tuyển</label>`+listEditor('documents');
+  if(cmsTab==='cta')return fld('Tiêu đề CTA',c.cta.title,'cta.title')+area('Mô tả CTA',c.cta.desc,'cta.desc');
+  if(cmsTab==='contact')return `<div class="grid2">`+fld('Hotline',c.contact.hotline,'contact.hotline')+fld('Điện thoại 2',c.contact.tel2,'contact.tel2')+`</div>`+fld('Địa chỉ',c.contact.address,'contact.address')+fld('Hạn nộp hồ sơ',c.contact.deadline,'contact.deadline');
+  return '';
+}
+// Quy chuẩn ảnh theo từng vị trí trên landing
+const HERO_IMG ={hint:'Dọc · tỉ lệ 3:4 · nên ≥ 1200×1600px',css:'3 / 4', ratio:0.75,  w:200};
+const DEST_IMG ={hint:'Ngang · tỉ lệ 8:3 · nên ≥ 1600×600px',css:'8 / 3', ratio:2.667, w:300};
+const SLIDE_IMG={hint:'Ngang · tỉ lệ 4:3 · nên ≥ 800×600px', css:'4 / 3', ratio:1.333, w:240};
+function imgPicker(label,src,path,spec){
+  return `<div class="imgcard" style="max-width:${spec.w}px;margin-bottom:14px">
+    <img src="${esc(src)}" alt="" style="aspect-ratio:${spec.css};height:auto;object-fit:cover" onerror="this.style.opacity=.3"/>
+    <div class="ph"><div class="t">${label}</div><div class="s">${spec.hint}</div>
+    <label class="btn tiny" style="display:inline-block">Đổi ảnh<input type="file" accept="image/*" hidden onchange="pickImg('${path}',this,${spec.ratio},'${esc(label)}')"/></label></div></div>`;
+}
+function compressImage(file,maxW){return new Promise(res=>{
+  if(!file.type.startsWith('image/')||file.type==='image/svg+xml'){res(file);return;}
+  const img=new Image(),url=URL.createObjectURL(file);
+  img.onload=()=>{let w=img.naturalWidth,h=img.naturalHeight;if(w>maxW){h=Math.round(h*maxW/w);w=maxW;}
+    const cv=document.createElement('canvas');cv.width=w;cv.height=h;cv.getContext('2d').drawImage(img,0,0,w,h);
+    cv.toBlob(b=>{URL.revokeObjectURL(url);res(b&&b.size<file.size?new File([b],file.name.replace(/\.[^.]+$/,'')+'.jpg',{type:'image/jpeg'}):file);},'image/jpeg',0.82);};
+  img.onerror=()=>res(file);img.src=url;});}
+function pickImg(path,el,ratio,label){
+  const f=el.files[0];if(!f)return;const url=URL.createObjectURL(f);
+  const im=new Image();
+  im.onload=async()=>{const r=im.naturalWidth/im.naturalHeight;
+    if(ratio&&Math.abs(r-ratio)/ratio>0.25)toast('⚠ '+(label||'Ảnh')+' lệch tỉ lệ — có thể bị cắt; nên dùng đúng kích thước gợi ý.');
+    if(BACKEND){try{const up=await compressImage(f,1600);const key='cms/'+PNE.uid()+'-'+f.name.replace(/[^\w.\-]+/g,'_').replace(/\.[^.]+$/,'.jpg');await PNE.uploadLanding(key,up);setPath(path,PNE.publicUrl(key));renderCMS();toast('Đã tải ảnh lên');}catch(ex){toast('Tải ảnh lỗi: '+(ex.message||ex));}}
+    else{setPath(path,url);renderCMS();toast('Đã đổi ảnh (xem thử)');}};
+  im.src=url;
+}
+function slideAdd(){content.journey.slides.push({img:'',tag:'',cap:''});renderCMS();}
+function slideDel(i){content.journey.slides.splice(i,1);renderCMS();}
+
+/* ===== Phân quyền ===== */
+function renderRoles(){
+  const rows=users.map(u=>`<tr>
+    <td><span class="who2">${esc(u.name)}</span><div class="sub">${esc(u.email)}</div></td>
+    <td><select style="width:auto;padding:7px 10px" onchange="setUserRole('${u.id}',this.value)">${Object.keys(ROLE_LABEL).map(r=>`<option value="${r}" ${u.role===r?'selected':''}>${ROLE_LABEL[r]}</option>`).join('')}</select></td>
+    <td>${u.status==='Hoạt động'?'<span class="docpill doc-ok">Hoạt động</span>':'<span class="docpill doc-low">Tạm khóa</span>'}</td>
+    <td style="text-align:right"><button class="btn tiny" onclick="toggleUser('${u.id}')">${u.status==='Hoạt động'?'Khóa':'Mở'}</button></td></tr>`).join('');
+  const feats=[
+    ['Xem hồ sơ & đăng ký tư vấn',{admin:1,editor:1,consultant:1,viewer:1}],
+    ['Cập nhật trạng thái · ghi chú · đánh dấu hồ sơ',{admin:1,editor:1,consultant:1,viewer:0}],
+    ['Xóa hồ sơ',{admin:1,editor:0,consultant:0,viewer:0}],
+    ['Sửa & xuất bản nội dung landing',{admin:1,editor:1,consultant:0,viewer:0}],
+    ['Quản lý người dùng & phân quyền',{admin:1,editor:0,consultant:0,viewer:0}],
+  ];
+  const yn=v=>v?'<span style="color:var(--ok);font-weight:800">✓</span>':'<span class="muted">–</span>';
+  const matrix=`<div class="tbl-wrap"><table><thead><tr><th>Chức năng</th><th>Admin</th><th>Biên tập</th><th>Tư vấn</th><th>Chỉ xem</th></tr></thead><tbody>${feats.map(([f,m])=>`<tr><td>${f}</td><td>${yn(m.admin)}</td><td>${yn(m.editor)}</td><td>${yn(m.consultant)}</td><td>${yn(m.viewer)}</td></tr>`).join('')}</tbody></table></div>`;
+  document.getElementById('sec-roles').innerHTML=`
+    <div class="panel"><h2>Tài khoản quản trị</h2>
+      <div class="toolbar"><input id="nu_name" class="search" placeholder="Họ tên"/><input id="nu_email" class="search" placeholder="Email đăng nhập"/>
+        <select id="nu_role" style="width:auto;padding:10px 12px">${Object.keys(ROLE_LABEL).map(r=>`<option value="${r}">${ROLE_LABEL[r]}</option>`).join('')}</select>
+        <button class="btn pri" onclick="addUser()">+ Thêm tài khoản</button></div>
+      <div class="tbl-wrap"><table><thead><tr><th>Người dùng</th><th>Vai trò</th><th>Trạng thái</th><th></th></tr></thead><tbody>${rows}</tbody></table></div></div>
+    <div class="panel"><h2>Quyền theo vai trò</h2>${matrix}
+      <p class="muted" style="font-size:12px;margin-top:10px">Khi chạy thật, quyền được Supabase RLS thực thi theo tài khoản đăng nhập (email gắn vai trò) — không thể vượt qua bằng giao diện.</p></div>`;
+}
+function setUserRole(id,v){const u=users.find(x=>x.id===id);u.role=v;persist('user',u);toast(BACKEND?'Đã đổi vai trò':'Đã đổi vai trò (xem thử)');}
+function toggleUser(id){const u=users.find(x=>x.id===id);u.status=u.status==='Hoạt động'?'Tạm khóa':'Hoạt động';persist('user',u);renderRoles();}
+function addUser(){const n=document.getElementById('nu_name').value.trim(),e=document.getElementById('nu_email').value.trim(),r=document.getElementById('nu_role').value;if(!n||!e)return toast('Nhập họ tên và email');const u={id:(BACKEND&&PNE.uid)?PNE.uid():'u'+Date.now(),name:n,email:e,role:r,status:'Hoạt động'};users.push(u);persist('user',u);toast(BACKEND?'Đã thêm vai trò. Nhớ tạo tài khoản đăng nhập (email+mật khẩu) cho email này trong Supabase → Authentication.':'Đã thêm tài khoản (xem thử)');renderRoles();}
+
+/* ===== Kết nối Supabase (backend) ===== */
+let BACKEND=false;
+function renderAll(){renderNav();renderDash();renderConsult();renderApply();renderCMS();renderRoles();}
+function deepMerge(t,s){for(const k in s){if(s[k]&&typeof s[k]==='object'&&!Array.isArray(s[k])&&t[k]&&typeof t[k]==='object'){deepMerge(t[k],s[k]);}else{t[k]=s[k];}}return t;}
+function persist(kind,rec){if(!BACKEND)return;const fn=kind==='consult'?PNE.saveConsult:kind==='apply'?PNE.saveApply:kind==='user'?PNE.saveUser:null;if(fn)fn(rec).catch(ex=>toast('Lưu lên máy chủ lỗi: '+(ex.message||ex)));}
+async function boot(){
+  if(window.PNE&&PNE.enabled()){
+    BACKEND=true;
+    if(PNE.session())await afterLogin();
+    else document.getElementById('loginBg').style.display='flex';
+  }else{ renderAll(); } // chế độ xem thử (chưa nối Supabase)
+}
+async function doLogin(e){
+  e.preventDefault();
+  const email=document.getElementById('li_email').value.trim(),pw=document.getElementById('li_pw').value;
+  const btn=document.getElementById('li_btn'),err=document.getElementById('li_err');
+  btn.disabled=true;btn.textContent='Đang đăng nhập...';err.style.display='none';
+  try{await PNE.signIn(email,pw);document.getElementById('loginBg').style.display='none';await afterLogin();}
+  catch(ex){err.textContent=ex.message||'Đăng nhập thất bại';err.style.display='block';}
+  finally{btn.disabled=false;btn.textContent='Đăng nhập';}
+}
+function logout(){PNE.signOut();location.reload();}
+async function afterLogin(){
+  const s=PNE.session()||{};
+  currentRole=s.role||'viewer';
+  const rv=document.getElementById('roleView');if(rv){rv.value=currentRole;rv.closest('label').style.display=currentRole==='admin'?'flex':'none';}
+  const pill=document.querySelector('.demo-pill');
+  if(pill)pill.outerHTML=`<span class="demo-pill" style="color:var(--ok);background:var(--okb)" title="${esc(s.email||'')}">● ${esc(s.name||s.email||'Đã đăng nhập')}</span><button class="btn tiny" style="margin-left:8px" onclick="logout()">Đăng xuất</button>`;
+  await loadAll();renderAll();
+}
+async function loadAll(){
+  try{
+    const [c,a,u]=await Promise.all([PNE.listConsult(),PNE.listApply(DOCS),PNE.listUsers()]);
+    consult=c;apply=a;if(u&&u.length)users=u;
+    const draft=await PNE.cmsGetDraft();if(draft)deepMerge(content,draft);
+  }catch(ex){toast('Lỗi tải dữ liệu: '+(ex.message||ex));}
+}
+boot();
+</script>
+</body>
+</html>
